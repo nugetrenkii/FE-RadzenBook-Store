@@ -7,13 +7,13 @@
 
 .header_top_right {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     padding: 10px 0 13px;
 
     ul{
         display: flex;
-        column-gap: 5px;
+        column-gap: 8px;
         list-style: none;
         
 
@@ -29,7 +29,8 @@
 
             span {
                 font-size: 14px;
-                margin-left: 2px;
+                margin-left: 7px;
+
             }
         }
 
@@ -50,14 +51,14 @@
             display: flex;
             color: map.get($theme-colors, "normal-text");
             align-items: center;
-            column-gap: 2px;
+            column-gap: 5px;
         }
 
         li:first-child{
             position: relative;
-            &::after {
+            &:after {
                 position: absolute;
-                right: -10px;
+                right: -5px;
                 top: 1px;
                 height: 20px;
                 width: 1px;
