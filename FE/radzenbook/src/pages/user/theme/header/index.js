@@ -5,16 +5,18 @@ import {
     FaYoutube,
     FaInstagram,
     FaUserCircle,
-    FaShoppingCart
+    FaShoppingCart,
+    FaPhone,
 } from "react-icons/fa";
+import { IoMenuOutline } from "react-icons/io5";
 import { CiMail } from "react-icons/ci";
 import { Link } from 'react-router-dom'
 import { formatter } from '../../../../utils/fomater';
 import { ROUTER } from 'utils/router';
 
 const Header = () => {
-
-    const [menus, setMenus] = useState([
+    const [isShowCategories, setShowCategories] = useState(true);
+    const [menus] = useState([
         {
             name: "Home",
             path: ROUTER.USER.HOME,
@@ -41,7 +43,6 @@ const Header = () => {
                     path: "",
                 },
             ]
-
         },
         {
             name: "News",
@@ -53,6 +54,11 @@ const Header = () => {
         }
     ])
 
+    const [activeKey, setActiveKey] = useState(0); 
+
+    const handleMenuClick = (menuKey) => {
+        setActiveKey(menuKey); 
+    };
 
     return (
         <>
@@ -109,8 +115,8 @@ const Header = () => {
                         <nav className='header_menu'>
                             <ul>
                                 {menus?.map((menu, menuKey) => (
-                                    <li key={menuKey} className={menuKey === 0 ? "active" : ""}>
-                                        <Link to={menu?.path}>
+                                    <li key={menuKey} className={menuKey === activeKey ? "active" : ""}>
+                                        <Link to={menu?.path} onClick={() => handleMenuClick(menuKey)}>
                                             {menu?.name}
                                         </Link>
                                         {
@@ -163,6 +169,59 @@ const Header = () => {
                                     </Link>
                                 </li>
                             </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className='container'>
+                <div className='row hero_category_container'>
+                    <div className='col-lg-3 hero_category'>
+                        <div className='hero_category_all' onClick={() => setShowCategories(!isShowCategories)}>
+                            <IoMenuOutline />
+                            Product List
+                        </div>
+                        <ul className={isShowCategories ? "" : "hidden"}>
+                            <li>
+                                <Link to="#">Manga/Comic</Link>
+                            </li>
+                            <li>
+                                <Link to="#">Knowledge, science</Link>
+                            </li>
+                            <li>
+                                <Link to="#">Foreign literature</Link>
+                            </li>
+                            <li>
+                                <Link to="#">Vietnamese literature</Link>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className='col-lg-9 hero_search_container'>
+                        <div className='hero_search'>
+                            <div className='hero_search_form'>
+                                <form>
+                                    <input type='text' placeholder='What do you want to search?'></input>
+                                    <button type='submit'>Search</button>
+                                </form>
+                            </div>
+                            <div className='hero_search_phone'>
+                                <div className='hero_search_phone_icon'>
+                                    <FaPhone />
+                                </div>
+                                <div className='hero_search_phone_text'>
+                                    <p>039.820.4444</p>
+                                    <span>Support 24/7</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='hero_items'>
+                            <div className='hero_text'>
+                                <span>new book</span>
+                                <h2>Promotional discounts <br />up to 50%</h2>
+                                <p>Free ship extra</p>
+                                <Link to="" className='primary-btn'>
+                                    Buy Now
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
