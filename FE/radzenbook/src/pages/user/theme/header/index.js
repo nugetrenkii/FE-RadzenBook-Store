@@ -138,21 +138,6 @@ const Header = () => {
                                     </li>
                                 ))
                                 }
-
-                                {/* <li>
-                                    <Link to="">Product</Link>
-                                    <ul>
-                                        <li>
-                                            Product 1
-                                        </li>
-                                        <li>
-                                            Product 2
-                                        </li>
-                                        <li>
-                                            Product 3
-                                        </li>
-                                    </ul>
-                                </li> */}
                             </ul>
                         </nav>
                     </div>
