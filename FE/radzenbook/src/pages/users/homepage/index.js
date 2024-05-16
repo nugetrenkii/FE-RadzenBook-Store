@@ -1,6 +1,16 @@
-import cate1 from 'assets/users/images/categories/jjk1.jpg'
-import cate2 from 'assets/users/images/categories/jjk2.jpg'
-import cate3 from 'assets/users/images/categories/jjk3.jpg'
+import feaImg1 from "assets/users/images/featured/conan.jpg";
+import feaImg2 from "assets/users/images/featured/jjk-vol11.jpg";
+import feaImg3 from "assets/users/images/featured/kny.jpg";
+import feaImg4 from "assets/users/images/featured/hero-academy.jpg";
+import feaImg5 from "assets/users/images/featured/naruto.jpg";
+import feaImg6 from "assets/users/images/featured/onepiece.jpg";
+import feaImg7 from "assets/users/images/featured/spyXfamily.jpg";
+import feaImg8 from "assets/users/images/featured/thi-tran-meo.jpg";
+import feaImg9 from "assets/users/images/featured/solo_level.jpg";
+import feaImg10 from "assets/users/images/featured/duoc-su-tu-su.jpg";
+import feaImg11 from "assets/users/images/featured/fire_force.jpg";
+import feaImg12 from "assets/users/images/featured/doraemon.jpg";
+
 import cate4 from 'assets/users/images/categories/jjk4.jpg'
 
 // import banner
@@ -67,24 +77,24 @@ const HomePage = () => {
 
   const sliderItems = [
     {
-      bgImage: cate4,
-      name: "Cam tươi",
+      bgImage: feaImg2,
+      name: "Jujutsu Kaisen",
     },
     {
-      bgImage: cate4,
-      name: "Hoa quả khô",
+      bgImage: feaImg3,
+      name: "Kimetsu no Yaiba",
     },
     {
-      bgImage: cate4,
-      name: "Rau củ tươi",
+      bgImage: feaImg12,
+      name: "Doraemon",
     },
     {
-      bgImage: cate4,
-      name: "Sữa hộp",
+      bgImage: feaImg11,
+      name: "Fire Force",
     },
     {
-      bgImage: cate4,
-      name: "Thịt bò",
+      bgImage: feaImg4,
+      name: "My Hero Academia",
     },
   ];
 
@@ -120,7 +130,7 @@ const HomePage = () => {
       </div>
       {/* Featured End */}
       {/* Banner Begin */}
-      <div className="container">
+      {/* <div className="container">
         <div className="banner">
           <div className="banner__pic">
             <img src={banner1Img} alt="banner" />
@@ -129,7 +139,7 @@ const HomePage = () => {
             <img src={banner2Img} alt="banner" />
           </div>
         </div>
-      </div>
+      </div> */}
       {/* Banner End */}
     </>
   );

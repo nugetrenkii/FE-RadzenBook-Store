@@ -38,7 +38,7 @@ const ProductsPage = () => {
     },
     {
         img: feaImg4,
-        name: "Hero Academy",
+        name: "My Hero Academia",
         price: 30000,
     },
     {

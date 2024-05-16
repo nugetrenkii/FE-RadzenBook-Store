@@ -6,6 +6,20 @@ import cate1 from 'assets/users/images/categories/jjk1.jpg'
 import cate2 from 'assets/users/images/categories/jjk2.jpg'
 import cate3 from 'assets/users/images/categories/jjk3.jpg'
 import cate4 from 'assets/users/images/categories/jjk4.jpg'
+
+import feaImg1 from "assets/users/images/featured/conan.jpg";
+import feaImg2 from "assets/users/images/featured/jjk-vol11.jpg";
+import feaImg3 from "assets/users/images/featured/kny.jpg";
+import feaImg4 from "assets/users/images/featured/hero-academy.jpg";
+import feaImg5 from "assets/users/images/featured/naruto.jpg";
+import feaImg6 from "assets/users/images/featured/onepiece.jpg";
+import feaImg7 from "assets/users/images/featured/spyXfamily.jpg";
+import feaImg8 from "assets/users/images/featured/thi-tran-meo.jpg";
+import feaImg9 from "assets/users/images/featured/solo_level.jpg";
+import feaImg10 from "assets/users/images/featured/duoc-su-tu-su.jpg";
+import feaImg11 from "assets/users/images/featured/fire_force.jpg";
+import feaImg12 from "assets/users/images/featured/doraemon.jpg";
+
 import { AiOutlineClose } from "react-icons/ai";
 import { formatter } from "utils/formater";
 import { useNavigate } from "react-router-dom";
@@ -15,27 +29,27 @@ const ShoppingCartPage = () => {
   const navigate = useNavigate();
   const carts = [
     {
-      img: cate1,
-      name: "Sản phẩm",
-      price: 200000,
+      img: feaImg1,
+      name: "Conan",
+      price: 25000,
       quantity: 1,
     },
     {
-      img: cate2,
-      name: "Sản phẩm",
-      price: 10000,
+      img: feaImg2,
+      name: "Jujutsu Kaisen",
+      price: 30000,
       quantity: 1,
     },
     {
-      img: cate3,
-      name: "Sản phẩm",
-      price: 240500,
+      img: feaImg3,
+      name: "Kimetsu no Yaiba",
+      price: 30000,
       quantity: 1,
     },
     {
-      img: cate4,
-      name: "Sản phẩm",
-      price: 330000,
+      img: feaImg4,
+      name: "My Hero Academia",
+      price: 30000,
       quantity: 1,
     },
   ];
@@ -92,13 +106,13 @@ const ShoppingCartPage = () => {
               <h2>Tổng đơn:</h2>
               <ul>
                 <li>
-                  Giá: <span>{formatter(9000000)}</span>
+                  Giá: <span>{formatter(115000)}</span>
                 </li>
                 <li>
                   Số lượng: <span>4</span>
                 </li>
                 <li>
-                  Thành tiền: <span>{formatter(34000000)}</span>
+                  Thành tiền: <span>{formatter(115000)}</span>
                 </li>
               </ul>
               <button

@@ -17,9 +17,9 @@ const FooterUS = () => {
             <div className="footer__about">
               <h1 className="footer__about__logo">BookStack</h1>
               <ul>
-                <li>Địa chỉ: 213 Dương Đình Nghệ</li>
-                <li>Phone: 0977-232-223</li>
-                <li>Email: sivicode@gmail.com</li>
+                <li>Địa chỉ: 313 Trường Chinh</li>
+                <li>Phone: 039-820-4444</li>
+                <li>Email: bookstack@gmail.com</li>
               </ul>
             </div>
           </div>

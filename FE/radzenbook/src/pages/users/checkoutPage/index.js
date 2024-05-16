@@ -47,24 +47,28 @@ const CheckoutPage = () => {
               <h3>Đơn hàng </h3>
               <ul>
                 <li>
-                  <span>Sản phẩm 1</span>
-                  <b>{formatter(10000)} (1)</b>
+                  <span>Conan</span>
+                  <b>{formatter(25000)} (1)</b>
                 </li>
                 <li>
-                  <span>Sản phẩm 2</span>
-                  <b>{formatter(20000)} (3)</b>
+                  <span>Jujutsu Kaisen</span>
+                  <b>{formatter(30000)} (1)</b>
                 </li>
                 <li>
-                  <span>Sản phẩm 3</span>
+                  <span>Kimetsu no Yaiba</span>
+                  <b>{formatter(30000)} (1)</b>
+                </li>
+                <li>
+                  <span>My Hero Academia</span>
                   <b>{formatter(30000)} (1)</b>
                 </li>
                 <li>
                   <h4>Mã giảm giá</h4>
-                  <b>SVC783</b>
+                  <b>BOKS24</b>
                 </li>
                 <li className="checkout__order__subtotal">
                   <h3>Tổng đơn</h3>
-                  <b>{formatter(90000)}</b>
+                  <b>{formatter(115000)}</b>
                 </li>
               </ul>
               <button type="type" className="button-submit">
