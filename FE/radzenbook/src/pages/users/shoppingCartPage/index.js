@@ -74,7 +74,7 @@ const ShoppingCartPage = () => {
                 <tr key={key}>
                   <td className="shoping__cart__item">
                     <img src={item.img} alt="product-pic" />
-                    <h4>{`${item.name} ${key + 1}`}</h4>
+                    <h4>{`${item.name}`}</h4>
                   </td>
                   <td>{formatter(item.price)}</td>
                   <td>

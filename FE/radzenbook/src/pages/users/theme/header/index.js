@@ -180,7 +180,7 @@ const HeaderUS = () => {
                 <div className="header__top__left">
                   <ul>
                     <li>
-                      <BiMailSend /> hello@colorlib.com
+                      <BiMailSend /> bookstack@gmail.com
                     </li>
                     <li>Miễn phí ship đơn từ {formatter(200000)}</li>
                   </ul>
