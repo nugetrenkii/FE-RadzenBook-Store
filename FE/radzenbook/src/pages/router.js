@@ -8,6 +8,7 @@ import {
   CheckoutPage,
 } from "../pages";
 import MasterUsLayout from "./users/theme/masterUsLayout";
+import { CartProvider } from "../pages/users/shoppingCartPage/CartContext";
 
 const renderUserRouter = () => {
   const userRouters = [
@@ -20,7 +21,7 @@ const renderUserRouter = () => {
       component: <ProductsPage />,
     },
     {
-      path: ROUTERS.USER.PRODUCT,
+      path: ROUTERS.USER.PRODUCT_DETAIL,
       component: <ProductDetailPage />,
     },
     {
@@ -34,6 +35,7 @@ const renderUserRouter = () => {
   ];
 
   return (
+    <CartProvider>
     <MasterUsLayout>
       <Routes>
         {userRouters.map((item, key) => (
@@ -41,6 +43,7 @@ const renderUserRouter = () => {
         ))}
       </Routes>
     </MasterUsLayout>
+    </CartProvider>
   );
 };
 

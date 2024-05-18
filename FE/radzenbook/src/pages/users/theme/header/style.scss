@@ -109,8 +109,8 @@ $bannerImg: "/assets/users/images/hero/banner3.jpg";
             }
         }
 
-        .active a {
-            color: map.get($theme-colors, "main") !important;
+        .selected a, .selected-dropdown a {
+            color:  map.get($theme-colors, "main") !important;
         }
 
         .header__menu__dropdown {
@@ -190,6 +190,44 @@ $bannerImg: "/assets/users/images/hero/banner3.jpg";
         width: 100%;
         justify-content: right;
         overflow: hidden;
+    }
+}
+.header__noti {
+    display: flex;
+    padding: 24px 0;
+    justify-content: right;
+    align-items: center;
+
+    ul {
+        display: flex;
+        margin-right: 25px;
+
+        li {
+            list-style: none;
+            position: relative;
+            margin-left: 20px;
+
+            svg {
+                font-size: 25px;
+                color: map.get($theme-colors, "normal-text");
+            }
+
+            span {
+                color: white;
+                background: map.get($theme-colors, "main");
+                height: 20px;
+                left: 20px;
+                top: -2px;
+                border-radius: 40px;
+                display: inline-block;
+                text-align: center;
+                line-height: 20px;
+                font-size: 13px;
+                font-weight: 500;
+                position: absolute;
+                padding: 0px 7px;
+            }
+        }
     }
 }
 

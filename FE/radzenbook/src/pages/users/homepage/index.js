@@ -1,21 +1,8 @@
-import feaImg1 from "assets/users/images/featured/conan.jpg";
 import feaImg2 from "assets/users/images/featured/jjk-vol11.jpg";
 import feaImg3 from "assets/users/images/featured/kny.jpg";
 import feaImg4 from "assets/users/images/featured/hero-academy.jpg";
-import feaImg5 from "assets/users/images/featured/naruto.jpg";
-import feaImg6 from "assets/users/images/featured/onepiece.jpg";
-import feaImg7 from "assets/users/images/featured/spyXfamily.jpg";
-import feaImg8 from "assets/users/images/featured/thi-tran-meo.jpg";
-import feaImg9 from "assets/users/images/featured/solo_level.jpg";
-import feaImg10 from "assets/users/images/featured/duoc-su-tu-su.jpg";
 import feaImg11 from "assets/users/images/featured/fire_force.jpg";
 import feaImg12 from "assets/users/images/featured/doraemon.jpg";
-
-import cate4 from 'assets/users/images/categories/jjk4.jpg'
-
-// import banner
-import banner1Img from "assets/users/images/banner/banner-1.jpg";
-import banner2Img from "assets/users/images/banner/banner-2.jpg";
 
 import { memo } from "react";
 import Carousel from "react-multi-carousel";
@@ -55,7 +42,7 @@ const HomePage = () => {
       data[key].products.forEach((item, index) => {
         tabPanel.push(
           <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" key={index}>
-            <ProductCard img={item.img} name={item.name} price={item.price} />
+            <ProductCard id={item.id} img={item.img} name={item.name} price={item.price} />
           </div>
         );
       });
