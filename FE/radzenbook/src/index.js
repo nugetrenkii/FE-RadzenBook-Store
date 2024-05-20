@@ -7,7 +7,9 @@ import "./style/style.scss";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <BrowserRouter>
-    <RouterCustom />
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <RouterCustom />
+    </BrowserRouter>
+  </React.StrictMode>
 );
