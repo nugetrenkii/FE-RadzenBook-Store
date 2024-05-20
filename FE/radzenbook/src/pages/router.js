@@ -6,6 +6,14 @@ import {
   ProductDetailPage,
   ShoppingCartPage,
   CheckoutPage,
+  HomePageAdmin,
+  Dashboard,
+  Team,
+  Contacts,
+  Invoices,
+  Authors,
+  Types,
+  Supplier
 } from "../pages";
 import MasterUsLayout from "./users/theme/masterUsLayout";
 
@@ -32,15 +40,62 @@ const renderUserRouter = () => {
       component: <CheckoutPage />,
     },
   ];
-
+  const adminRouters = [
+    {
+      path: ROUTERS.ADMIN.HOME,
+      component: <HomePageAdmin />,
+    },
+    {
+      path: ROUTERS.ADMIN.DASHBOARD,
+      component: <Dashboard />,
+    },
+    {
+      path: ROUTERS.ADMIN.TEAM,
+      component: <Team />,
+    },
+    {
+      path: ROUTERS.ADMIN.CONTACT,
+      component: <Contacts />,
+    },
+    {
+      path: ROUTERS.ADMIN.INVOICES,
+      component: <Invoices />,
+    },
+    {
+      path: ROUTERS.ADMIN.AUTHOR,
+      component: <Authors />,
+    },
+    {
+      path: ROUTERS.ADMIN.TYPE,
+      component: <Types />,
+    },
+    {
+      path: ROUTERS.ADMIN.SUPPLIER,
+      component: <Supplier />,
+    },
+  ];
+  console.log(ROUTERS.ADMIN.DASHBOARD);
   return (
-    <MasterUsLayout>
-      <Routes>
-        {userRouters.map((item, key) => (
+    <Routes>
+      {userRouters.map((item, key) => (
+        <Route
+          key={key}
+          path={item.path}
+          element={<MasterUsLayout>{item.component}</MasterUsLayout>}
+        />
+      ))}
+      {adminRouters.map((item, key) =>
+        item.path.startsWith("/admin") ? (
           <Route key={key} path={item.path} element={item.component} />
-        ))}
-      </Routes>
-    </MasterUsLayout>
+        ) : (
+          <Route
+            key={key}
+            path={item.path}
+            element={<HomePageAdmin screen={item.component} />}
+          />
+        )
+      )}
+    </Routes>
   );
 };
 
