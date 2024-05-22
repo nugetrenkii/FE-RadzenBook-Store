@@ -16,6 +16,7 @@ import {
   Supplier
 } from "../pages";
 import MasterUsLayout from "./users/theme/masterUsLayout";
+import { CartProvider } from "../pages/users/shoppingCartPage/CartContext";
 
 const renderUserRouter = () => {
   const userRouters = [
@@ -28,7 +29,7 @@ const renderUserRouter = () => {
       component: <ProductsPage />,
     },
     {
-      path: ROUTERS.USER.PRODUCT,
+      path: ROUTERS.USER.PRODUCT_DETAIL,
       component: <ProductDetailPage />,
     },
     {
@@ -76,6 +77,7 @@ const renderUserRouter = () => {
   ];
   console.log(ROUTERS.ADMIN.DASHBOARD);
   return (
+    <CartProvider>
     <Routes>
       {userRouters.map((item, key) => (
         <Route
@@ -96,6 +98,7 @@ const renderUserRouter = () => {
         )
       )}
     </Routes>
+    </CartProvider>
   );
 };
 

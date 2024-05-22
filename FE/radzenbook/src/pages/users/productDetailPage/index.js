@@ -1,9 +1,5 @@
-import cate1 from 'assets/users/images/categories/jjk1.jpg'
-import cate2 from 'assets/users/images/categories/jjk2.jpg'
-import cate3 from 'assets/users/images/categories/jjk3.jpg'
-import cate4 from 'assets/users/images/categories/jjk4.jpg'
 import BreadcrumbUS from "pages/users/theme/breadcrumb";
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import {
   AiOutlineCopy,
   AiOutlineEye,
@@ -13,34 +9,55 @@ import {
 import { formatter } from "utils/formater";
 import "./style.scss";
 import { featProducts } from "utils/common";
+import { allProducts } from "utils/allProducts";
 import { ProductCard, Quantity } from "component";
+import { useParams } from "react-router-dom";
 
 const ProductsDetailPage = () => {
-  const imgs = [cate1, cate2, cate3];
+  const { id } = useParams();
+
+  const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+  const product = allProducts.find((product) => product.id === parseInt(id));
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
+  const handleQuantityChange = (newQuantity) => {
+    setQuantity(newQuantity);
+  };
+
   return (
     <>
       <BreadcrumbUS name={"Chi tiết sản phẩm"} />
       <div className="container">
         <div className="row">
           <div className="col-lg-6 col-md-12 col-sm-12 product__details__pic">
-            <img src={cate4} alt="product-pic" />
+            <img src={product.img[0]} alt="product-pic" />
             <div className="main">
-              {imgs.map((item, key) => (
+              {product.img.map((item, key) => (
                 <img key={key} src={item} alt="product-pic" />
               ))}
             </div>
           </div>
           <div className="col-lg-6 col-md-12 col-sm-12 product__details__text">
-            <h2>Jujutsu Kaisen</h2>
+            <h2>{product.name}</h2>
             <div className="seen-icon">
               <AiOutlineEye />
               {` 10.123.434 (lượt đã xem)`}
             </div>
-            <h3 className="product__details__quantity">{formatter(20000000)}</h3>
+            <h3 className="product__details__quantity">{formatter(product.price)}</h3>
             <p>
-            BookStack nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng cũng như tất cả Hệ Thống BookStack trên toàn quốc.
+              BookStack nhận đặt hàng trực tuyến và giao hàng tận nơi. KHÔNG hỗ trợ đặt mua và nhận hàng trực tiếp tại văn phòng cũng như tất cả Hệ Thống BookStack trên toàn quốc.
             </p>
-            <Quantity />
+            <Quantity 
+              quantity={quantity} 
+              onQuantityChange={handleQuantityChange} 
+
+            />
             <ul>
               <li>
                 <b>Tình trạng:</b> <span>Còn hàng</span>
@@ -64,7 +81,7 @@ const ProductsDetailPage = () => {
           <ul>
             <li>
               <p>
-              Tác giả: 	芥見 下々&nbsp;
+                Tác giả: 	芥見 下々&nbsp;
               </p>
             </li>
             <li>
@@ -72,7 +89,7 @@ const ProductsDetailPage = () => {
             </li>
             <li>
               <p>
-              Năm XB:	2020
+                Năm XB:	2020
               </p>
             </li>
             <li>
@@ -95,7 +112,7 @@ const ProductsDetailPage = () => {
         <div className="row">
           {featProducts.all.products.map((item, key) => (
             <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" key={key}>
-              <ProductCard img={item.img} name={item.name} price={item.price} />
+              <ProductCard id={item.id} img={item.img} name={item.name} price={item.price} />
             </div>
           ))}
         </div>

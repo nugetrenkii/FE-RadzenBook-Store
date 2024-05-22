@@ -10,6 +10,7 @@ import {
   AiOutlineTwitter,
   AiOutlineUpCircle,
 } from "react-icons/ai";
+import { FaRegBell } from "react-icons/fa";
 import { BiMailSend, BiUser } from "react-icons/bi";
 import "react-multi-carousel/lib/styles.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -17,13 +18,44 @@ import { formatter } from "utils/formater";
 import { ROUTERS } from "utils/router";
 import "./style.scss";
 import { categories } from "utils/common";
+import { useCart } from "pages/users/shoppingCartPage/CartContext";
 
 const HeaderUS = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { cartItems } = useCart();
+
   const [isShowHumberger, setIsShowHumberger] = useState(false);
   const [isHome, setIsHome] = useState(location.pathname.length <= 1);
   const [isShowCategories, setIsShowCategories] = useState(isHome);
+  const [selectedMenu, setSelectedMenu] = useState(null);
+  const [selectedDropdown, setSelectedDropdown] = useState(null);
+  const [notifications] = useState(3);
+
+
+  useEffect(() => {
+    const savedSelectedMenu = localStorage.getItem("selectedMenu");
+    const savedSelectedDropdown = localStorage.getItem("selectedDropdown");
+
+    if (savedSelectedMenu) {
+      setSelectedMenu(parseInt(savedSelectedMenu, 10));
+    }
+
+    if (savedSelectedDropdown) {
+      setSelectedDropdown(savedSelectedDropdown);
+    }
+  }, []);
+
+
+  useEffect(() => {
+    if (selectedMenu !== null) {
+      localStorage.setItem("selectedMenu", selectedMenu);
+    }
+
+    if (selectedDropdown !== null) {
+      localStorage.setItem("selectedDropdown", selectedDropdown);
+    }
+  }, [selectedMenu, selectedDropdown]);
 
   const [menus, setMenus] = useState([
     {
@@ -31,11 +63,11 @@ const HeaderUS = () => {
       path: ROUTERS.USER.HOME,
     },
     {
-      name: "Cửa hàng",
+      name: "Sản phẩm",
       path: ROUTERS.USER.PRODUCTS,
     },
     {
-      name: "Sản phẩm",
+      name: "Cửa hàng",
       path: "",
       isShoSubMenu: false,
       child: [
@@ -69,19 +101,20 @@ const HeaderUS = () => {
     setIsShowCategories(isHome);
   }, [location]);
 
+  const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <>
       {/* Humberger Begin */}
       <div
-        className={`humberger__menu__overlay ${
-          isShowHumberger ? "active" : ""
-        }`}
+        className={`humberger__menu__overlay ${isShowHumberger ? "active" : ""
+          }`}
         onClick={() => setIsShowHumberger(false)}
       />
       <div
-        className={`humberger__menu__wrapper ${
-          isShowHumberger ? "show__humberger__menu__wrapper" : ""
-        }`}
+        className={`humberger__menu__wrapper ${isShowHumberger ? "show__humberger__menu__wrapper" : ""
+          }`}
       >
         <div
           className="header__logo"
@@ -92,13 +125,13 @@ const HeaderUS = () => {
         <div className="humberger__menu__cart">
           <ul>
             <li>
-              <Link to="#">
-                <AiOutlineShoppingCart /> <span>1</span>
+              <Link to={ROUTERS.USER.SHOPPING_CART}>
+                <AiOutlineShoppingCart /> <span>{totalQuantity}</span>
               </Link>
             </li>
           </ul>
           <div className="header__cart__price">
-            Giỏ hàng: <span>{formatter(1001230)}</span>
+            Giỏ hàng: <span>{formatter(totalAmount)}</span>
           </div>
         </div>
         <div className="humberger__menu__widget">
@@ -131,9 +164,8 @@ const HeaderUS = () => {
                 </Link>
                 {menu.child && (
                   <ul
-                    className={`header__menu__dropdown ${
-                      menu.isShoSubMenu ? "show__submenu" : ""
-                    }`}
+                    className={`header__menu__dropdown ${menu.isShoSubMenu ? "show__submenu" : ""
+                      }`}
                   >
                     {menu.child.map((childItem, childKey) => (
                       <li key={`${menuKey}-${childKey}`}>
@@ -180,7 +212,7 @@ const HeaderUS = () => {
                 <div className="header__top__left">
                   <ul>
                     <li>
-                      <BiMailSend /> hello@colorlib.com
+                      <BiMailSend /> bookstack@gmail.com
                     </li>
                     <li>Miễn phí ship đơn từ {formatter(200000)}</li>
                   </ul>
@@ -239,7 +271,7 @@ const HeaderUS = () => {
               <nav className="header__menu">
                 <ul>
                   {menus.map((menu, menuKey) => (
-                    <li key={menuKey} className={menuKey === 0 ? "active" : ""}>
+                    <li key={menuKey} className={`${menuKey === 0 ? "active" : ""} ${selectedMenu === menuKey ? "selected" : ""}`}>
                       <Link
                         to={menu.path}
                         onClick={(e) => {
@@ -247,6 +279,8 @@ const HeaderUS = () => {
                           newMenus[menuKey].isShoSubMenu =
                             !newMenus[menuKey].isShoSubMenu;
                           setMenus(newMenus);
+                          setSelectedMenu(menuKey);
+                          setSelectedDropdown(null);
                         }}
                       >
                         {menu.name}
@@ -254,8 +288,11 @@ const HeaderUS = () => {
                       {menu.child && (
                         <ul className="header__menu__dropdown">
                           {menu.child.map((childItem, childKey) => (
-                            <li key={`${menuKey}-${childKey}`}>
-                              <Link to={childItem.path}>{childItem.name}</Link>
+                            <li key={`${menuKey}-${childKey}`} className={selectedDropdown === `${menuKey}-${childKey}` ? "selected-dropdown" : ""}>
+                              <Link to={childItem.path}
+                                onClick={(e) => {
+                                  setSelectedDropdown(`${menuKey}-${childKey}`);
+                                }}>{childItem.name}</Link>
                             </li>
                           ))}
                         </ul>
@@ -268,12 +305,17 @@ const HeaderUS = () => {
             <div className="col-lg-3">
               <div className="header__cart">
                 <div className="header__cart__price">
-                  <span>{formatter(1001230)}</span>
+                  <span>{formatter(totalAmount)}</span>
                 </div>
                 <ul>
                   <li>
                     <Link to={ROUTERS.USER.SHOPPING_CART}>
-                      <AiOutlineShoppingCart /> <span>3</span>
+                      <AiOutlineShoppingCart /> <span>{totalQuantity}</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link >
+                      <FaRegBell /> <span>{notifications}</span>
                     </Link>
                   </li>
                 </ul>
@@ -337,7 +379,7 @@ const HeaderUS = () => {
                   <span>Siêu khuyến mãi</span>
                   <h2>
                     Lên tới <br />
-                     100%
+                    100%
                   </h2>
                   <p>Miễn phí giao hàng tận nơi.</p>
                   <Link to="" className="primary-btn">

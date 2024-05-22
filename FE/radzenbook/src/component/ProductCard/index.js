@@ -4,29 +4,45 @@ import { Link, generatePath } from "react-router-dom";
 import { formatter } from "utils/formater";
 import "./style.scss";
 import { ROUTERS } from "utils/router";
+import { useCart } from '../../pages/users/shoppingCartPage/CartContext';
 
-const ProductCard = ({ img, name, price }) => {
+const ProductCard = ({ id, img, name, price }) => {
+  const { addToCart } = useCart();
+  if (!id) {
+    console.error("ProductCard: Missing 'id' prop");
+    return null;
+  }
+  const handleAddToCart = () => {
+    addToCart({
+      id,
+      img,
+      name,
+      price
+    });
+  };
   return (
     <>
       <div className="featured__item pl-pr-10">
         <div
           className="featured__item__pic set-bg"
           style={{
-            backgroundImage: `url(${img})`,
+            backgroundImage: `url(${img[0]})`,
           }}
         >
           <ul className="featured__item__pic__hover">
             <li>
-              <AiOutlineEye/>
+              <Link to={generatePath(ROUTERS.USER.PRODUCT_DETAIL, { id })}>
+                <AiOutlineEye />
+              </Link>
             </li>
-            <li>
+            <li onClick={handleAddToCart}>
               <AiOutlineShoppingCart />
             </li>
           </ul>
         </div>
         <div className="featured__item__text">
           <h6>
-            <Link to={generatePath(ROUTERS.USER.PRODUCT, { id: 1 })}>
+            <Link to={generatePath(ROUTERS.USER.PRODUCT_DETAIL, { id })}>
               {name}
             </Link>
           </h6>

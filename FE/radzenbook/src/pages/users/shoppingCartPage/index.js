@@ -2,57 +2,23 @@ import BreadcrumbUS from "pages/users/theme/breadcrumb";
 import { memo } from "react";
 import "./style.scss";
 import { Quantity } from "component";
-import cate1 from 'assets/users/images/categories/jjk1.jpg'
-import cate2 from 'assets/users/images/categories/jjk2.jpg'
-import cate3 from 'assets/users/images/categories/jjk3.jpg'
-import cate4 from 'assets/users/images/categories/jjk4.jpg'
-
-import feaImg1 from "assets/users/images/featured/conan.jpg";
-import feaImg2 from "assets/users/images/featured/jjk-vol11.jpg";
-import feaImg3 from "assets/users/images/featured/kny.jpg";
-import feaImg4 from "assets/users/images/featured/hero-academy.jpg";
-import feaImg5 from "assets/users/images/featured/naruto.jpg";
-import feaImg6 from "assets/users/images/featured/onepiece.jpg";
-import feaImg7 from "assets/users/images/featured/spyXfamily.jpg";
-import feaImg8 from "assets/users/images/featured/thi-tran-meo.jpg";
-import feaImg9 from "assets/users/images/featured/solo_level.jpg";
-import feaImg10 from "assets/users/images/featured/duoc-su-tu-su.jpg";
-import feaImg11 from "assets/users/images/featured/fire_force.jpg";
-import feaImg12 from "assets/users/images/featured/doraemon.jpg";
 
 import { AiOutlineClose } from "react-icons/ai";
 import { formatter } from "utils/formater";
 import { useNavigate } from "react-router-dom";
 import { ROUTERS } from "utils/router";
+import { useCart } from "./CartContext";
 
 const ShoppingCartPage = () => {
   const navigate = useNavigate();
-  const carts = [
-    {
-      img: feaImg1,
-      name: "Conan",
-      price: 25000,
-      quantity: 1,
-    },
-    {
-      img: feaImg2,
-      name: "Jujutsu Kaisen",
-      price: 30000,
-      quantity: 1,
-    },
-    {
-      img: feaImg3,
-      name: "Kimetsu no Yaiba",
-      price: 30000,
-      quantity: 1,
-    },
-    {
-      img: feaImg4,
-      name: "My Hero Academia",
-      price: 30000,
-      quantity: 1,
-    },
-  ];
+  const { cartItems, removeFromCart } = useCart();
+
+  const updateCartItemQuantity = (itemId, newQuantity) => {
+    console.log("Updating item", itemId, "quantity to", newQuantity);
+  };
+
+  const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <>
@@ -70,18 +36,22 @@ const ShoppingCartPage = () => {
               </tr>
             </thead>
             <tbody>
-              {carts.map((item, key) => (
+              {cartItems.map((item, key) => (
                 <tr key={key}>
                   <td className="shoping__cart__item">
-                    <img src={item.img} alt="product-pic" />
-                    <h4>{`${item.name} ${key + 1}`}</h4>
+                    <img src={item.img[0]} alt="product-pic" />
+                    <h4>{`${item.name}`}</h4>
                   </td>
                   <td>{formatter(item.price)}</td>
                   <td>
-                    <Quantity hasAddToCart={false} />
+                  <Quantity 
+                      quantity={item.quantity} 
+                      onQuantityChange={(newQuantity) => updateCartItemQuantity(item.id, newQuantity)} 
+                      hasAddToCart={false}
+                    />
                   </td>
                   <td>{formatter(item.price * item.quantity)}</td>
-                  <td className="icon_close">
+                  <td className="icon_close" onClick={() => removeFromCart(item.id)}>
                     <AiOutlineClose />
                   </td>
                 </tr>
@@ -106,13 +76,13 @@ const ShoppingCartPage = () => {
               <h2>Tổng đơn:</h2>
               <ul>
                 <li>
-                  Giá: <span>{formatter(115000)}</span>
+                  Giá: <span>{formatter(totalAmount)}</span>
                 </li>
                 <li>
-                  Số lượng: <span>4</span>
+                  Số lượng: <span>{totalQuantity}</span>
                 </li>
                 <li>
-                  Thành tiền: <span>{formatter(115000)}</span>
+                  Thành tiền: <span>{formatter(totalAmount)}</span>
                 </li>
               </ul>
               <button
