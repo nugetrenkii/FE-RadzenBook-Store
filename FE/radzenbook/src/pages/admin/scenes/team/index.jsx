@@ -17,6 +17,8 @@ const Team = () => {
   const theme = useTheme();
   const colors = token(theme.palette.mode);
   const [open, setOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
+
   const columns = [
     { field: "id", headerName: "ID" },
     {
@@ -75,6 +77,21 @@ const Team = () => {
     },
   ];
 
+  const handleSelectionModelChange = (selectionModel) => {
+    const selectedID = selectionModel[0]; // Assuming single selection
+    const selectedRowData = mockDataTeam.find((row) => row.id === selectedID);
+    setSelectedRow(selectedRowData);
+  };
+
+  const handleEditClick = () => {
+    if (selectedRow) {
+      console.log(selectedRow);
+      setOpen(true);
+    } else {
+      alert("Please select a row to edit");
+    }
+  };
+
   return (
     <Box m="20px">
       <Box
@@ -92,7 +109,7 @@ const Team = () => {
             </IconButton>
           </Tooltip>
           <Tooltip title="Sửa">
-            <IconButton color="primary" onClick={() => setOpen(true)}>
+            <IconButton color="primary" onClick={handleEditClick}>
               <EditIcon />
             </IconButton>
           </Tooltip>
@@ -133,9 +150,10 @@ const Team = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} />
+        <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} onRowSelectionModelChange={handleSelectionModelChange}/>
       </Box>
-      <FormDialog open={open} onClose={() => setOpen(false)} /> {/* Render FormDialog */}
+      <FormDialog open={open} onClose={() => setOpen(false)} initialValues={selectedRow} />
+      
     </Box>
   );
 };

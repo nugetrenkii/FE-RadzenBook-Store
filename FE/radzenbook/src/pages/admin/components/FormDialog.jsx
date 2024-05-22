@@ -8,13 +8,14 @@ import {
   Box,
   TextField,
 } from "@mui/material";
-import { Formik, Field } from 'formik';
+import { Formik, Field } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import FormikSelect from "./FormikSelect";
 
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
+import Swal from "sweetalert2";
+
+const phoneRegExp = /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
 
 const options = [
   { value: "option1", label: "Option 1" },
@@ -26,10 +27,7 @@ const checkoutSchema = yup.object().shape({
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
-  contact: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
+  contact: yup.string().matches(phoneRegExp, "Phone number is not valid").required("required"),
   address1: yup.string().required("required"),
   address2: yup.string().required("required"),
   selectOption: yup.string().required("required"),
@@ -42,13 +40,20 @@ const initialValues = {
   contact: "",
   address1: "",
   address2: "",
-  selectOption: ''
+  selectOption: "",
 };
 
-const FormDialog = ({ open, onClose }) => {
+const FormDialog = ({ open, onClose, initialValues }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = (values) => {
+    Swal.fire({
+      title: "Success",
+      text: "Thêm thành công",
+      icon: "success",
+      showConfirmButton: false,
+      timer: 1500
+    });
     console.log(values);
     onClose(); // Close the dialog after form submission
   };
@@ -59,8 +64,17 @@ const FormDialog = ({ open, onClose }) => {
       <DialogContent>
         <Formik
           onSubmit={handleFormSubmit}
-          initialValues={initialValues}
+          initialValues={initialValues || {
+            firstName: "",
+            lastName: "",
+            email: "",
+            contact: "",
+            address1: "",
+            address2: "",
+            selectOption: "",
+          }}
           validationSchema={checkoutSchema}
+          enableReinitialize
         >
           {({
             values,
@@ -164,8 +178,8 @@ const FormDialog = ({ open, onClose }) => {
                       label="Select Option"
                       options={options}
                       value={field.value}
-                      onChange={(value) => form.setFieldValue('selectOption', value)}
-                      sx={{ gridColumn: 'span 4' }}
+                      onChange={(value) => form.setFieldValue("selectOption", value)}
+                      sx={{ gridColumn: "span 4" }}
                     />
                   )}
                 </Field>
