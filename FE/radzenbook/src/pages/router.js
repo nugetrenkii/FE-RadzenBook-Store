@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate  } from "react-router-dom";
 import { ROUTERS } from "utils/router";
 import {
   HomePageUS,
@@ -17,6 +17,7 @@ import {
 } from "../pages";
 import MasterUsLayout from "./users/theme/masterUsLayout";
 import { CartProvider } from "../pages/users/shoppingCartPage/CartContext";
+import Login_signup from "./login_signup";
 
 const renderUserRouter = () => {
   const userRouters = [
@@ -75,10 +76,18 @@ const renderUserRouter = () => {
       component: <Supplier />,
     },
   ];
-  console.log(ROUTERS.ADMIN.DASHBOARD);
+  const loginRouters = [
+    {
+      path: ROUTERS.LOGIN.SIGNIN,
+      component: <Login_signup />,
+    },
+  ];
   return (
     <CartProvider>
     <Routes>
+      {loginRouters.map((item, key) => (
+          <Route key={key} path={item.path} element={item.component} />
+        ))}
       {userRouters.map((item, key) => (
         <Route
           key={key}
@@ -97,6 +106,7 @@ const renderUserRouter = () => {
           />
         )
       )}
+      <Route path="/login" element={<Navigate to={ROUTERS.LOGIN.SIGNIN} />} />
     </Routes>
     </CartProvider>
   );
