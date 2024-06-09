@@ -3,7 +3,8 @@ import { token } from "../scenes/theme";
 export const mockDataTeam = [
   {
     id: 1,
-    name: "Jon Snow",
+    firstname: "Jon",
+    lastname: " Snow",
     email: "jonsnow@gmail.com",
     age: 35,
     phone: "(665)121-5454",
@@ -11,7 +12,8 @@ export const mockDataTeam = [
   },
   {
     id: 2,
-    name: "Cersei Lannister",
+    firstname: "Cersei",
+    lastname: " Lannister",
     email: "cerseilannister@gmail.com",
     age: 42,
     phone: "(421)314-2288",
