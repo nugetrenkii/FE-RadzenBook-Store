@@ -23,4 +23,8 @@ export const ROUTERS = {
     // GEOGRAPHY: "/geography",
     // CALENDAR: "/calendar"
   },
+  LOGIN: {
+    SIGNIN: "/login",
+    SIGNUP: "/register",
+  }
 };

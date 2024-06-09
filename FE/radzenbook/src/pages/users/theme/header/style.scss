@@ -61,9 +61,16 @@ $bannerImg: "/assets/users/images/hero/banner3.jpg";
             list-style: none;
             justify-content: right;
 
+            a:-webkit-any-link {
+                text-decoration: none;
+                color: #000000;
+            }
+
             li:last-child {
                 margin-left: 10px;
                 cursor: pointer;
+                
+
 
                 span {
                     vertical-align: text-top;

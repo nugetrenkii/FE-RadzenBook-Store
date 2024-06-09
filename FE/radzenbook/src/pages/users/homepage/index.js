@@ -4,14 +4,60 @@ import feaImg4 from "assets/users/images/featured/hero-academy.jpg";
 import feaImg11 from "assets/users/images/featured/fire_force.jpg";
 import feaImg12 from "assets/users/images/featured/doraemon.jpg";
 
-import { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "./style.scss";
 import { featProducts } from "utils/common";
 import { ProductCard } from "component";
+// import { getAllProducts, getUsers, getProductById } from "api/api";
+
+
+// if (loading) {
+//   return <p>Loading...</p>;
+// }
+
+// if (error) {
+//   return <p>Error: {error.message}</p>;
+// }
 
 const HomePage = () => {
+
+  // const [products, setProducts] = useState([]);
+  // const [featuredProduct, setFeaturedProduct] = useState(null);
+  // const [users, setUsers] = useState([]);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
+  // console.log('product', products)
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const productsData = await getAllProducts();
+  //       const usersData = await getUsers();
+  //       // const featuredProductData = await getProductById(1);
+  //       setProducts(productsData);
+  //       // setFeaturedProduct(featuredProductData);
+  //       setUsers(usersData);
+  //     } catch (error) {
+  //       setError(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+  // if (loading) {
+  //   return <p>Loading...</p>;
+  // }
+
+  // if (error) {
+  //   return <p>Error: {error.message}</p>;
+  // }
+
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -92,7 +138,7 @@ const HomePage = () => {
         <Carousel
           responsive={responsive}
           className="categories__slider"
-          // autoPlay
+        // autoPlay
         >
           {sliderItems.map((item, key) => (
             <div
@@ -116,16 +162,15 @@ const HomePage = () => {
         </div>
       </div>
       {/* Featured End */}
+
       {/* Banner Begin */}
       {/* <div className="container">
-        <div className="banner">
-          <div className="banner__pic">
-            <img src={banner1Img} alt="banner" />
-          </div>
-          <div className="banner__pic">
-            <img src={banner2Img} alt="banner" />
-          </div>
-        </div>
+        {users.map(item => 
+        <h2 key={item.id}>
+         {item.password}
+        </h2>
+        )
+        }
       </div> */}
       {/* Banner End */}
     </>

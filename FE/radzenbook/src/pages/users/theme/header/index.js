@@ -136,7 +136,7 @@ const HeaderUS = () => {
         </div>
         <div className="humberger__menu__widget">
           <div className="header__top__right__auth">
-            <Link to="">
+            <Link to="/login">
               <BiUser /> Đăng nhập
             </Link>
           </div>
@@ -243,10 +243,10 @@ const HeaderUS = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link to="">
+                        <Link to="/login">
                           <BiUser />
+                          <span>Đăng nhập</span>
                         </Link>
-                        <span>Đăng nhập</span>
                       </li>
                     </ul>
                   </div>
