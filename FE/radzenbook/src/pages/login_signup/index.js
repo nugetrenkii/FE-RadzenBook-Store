@@ -3,6 +3,10 @@ import * as Components from './Components';
 import { memo } from "react";
 import { LoginApi } from "services/AllServices";
 import { Alert, Snackbar } from "@mui/material";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { FcGoogle } from "react-icons/fc";
+import { SiFacebook } from "react-icons/si";
 
 const Login_signup = () => {
     const [signIn, toggle] = React.useState(true);
@@ -13,14 +17,16 @@ const Login_signup = () => {
     const handleLogin = async (event) => {
         event.preventDefault();
         if (!email || !password) {
-            setAlert({ open: true, message: 'Email or Password is required!' });
+            toast.error('Email or Password is required!');
             return;
         }
         let response = await LoginApi(email, password);
-        if(response && response.token){
+        if (response && response.token) {
+            toast.success('Login successfully!');
             localStorage.setItem("token", response.token);
+            console.log('check response:>>>>>>', response);
         }
-        console.log('check response:>>>>>>', response);
+
     }
 
     return (
@@ -33,21 +39,26 @@ const Login_signup = () => {
             <Components.Container className="containerLogin">
                 <Components.SignUpContainer signinIn={signIn}>
                     <Components.Form>
-                        <Components.Title>Create Account</Components.Title>
+                        <Components.Title>Tạo tài khoản</Components.Title>
                         <Components.Input type='text' placeholder='Name' />
                         <Components.Input type='email' placeholder='Email' />
                         <Components.Input type='password' placeholder='Password' />
-                        <Components.Button>Sign Up</Components.Button>
+                        <Components.Input type='password' placeholder='Confirm Password' />
+                        <Components.Button>Đăng ký</Components.Button>
                     </Components.Form>
                 </Components.SignUpContainer>
 
                 <Components.SignInContainer signinIn={signIn}>
                     <Components.Form onSubmit={handleLogin}>
-                        <Components.Title>Sign in</Components.Title>
-                        <Components.Input type='email' placeholder='Email'value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <Components.Input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)}  />
-                        <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
-                        <Components.Button type='submit'>Sigin In</Components.Button>
+                        <Components.Title>Đăng nhập</Components.Title>
+                        <Components.Input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <Components.Input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <Components.Anchor href='#'>Quên mật khẩu?</Components.Anchor>
+                        <Components.Button type='submit'>Đăng nhập</Components.Button>
+                        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                            <SiFacebook style={{ cursor: 'pointer', marginRight: '10px' }} />
+                            <FcGoogle style={{ cursor: 'pointer' }} />
+                        </div>
                     </Components.Form>
                 </Components.SignInContainer>
 
@@ -55,22 +66,22 @@ const Login_signup = () => {
                     <Components.Overlay signinIn={signIn}>
 
                         <Components.LeftOverlayPanel signinIn={signIn}>
-                            <Components.Title>Welcome Back!</Components.Title>
+                            <Components.Title>Chào mừng bạn đã trở lại!</Components.Title>
                             <Components.Paragraph>
-                                To keep connected with us please login with your personal info
+                                Để giữ kết nối với chúng tôi, vui lòng đăng nhập để tiếp tục!
                             </Components.Paragraph>
                             <Components.GhostButton onClick={() => toggle(true)}>
-                                Sign In
+                                Đăng nhập
                             </Components.GhostButton>
                         </Components.LeftOverlayPanel>
 
                         <Components.RightOverlayPanel signinIn={signIn}>
-                            <Components.Title>Hello, Friend!</Components.Title>
+                            <Components.Title>Chào bạn mới!</Components.Title>
                             <Components.Paragraph>
-                                Enter Your personal details and start journey with us
+                                Nhập thông tin cá nhân của bạn và đăng ký sử dụng trang web của chúng tôi!
                             </Components.Paragraph>
                             <Components.GhostButton onClick={() => toggle(false)}>
-                                Sigin Up
+                                Đăng ký
                             </Components.GhostButton>
                         </Components.RightOverlayPanel>
 

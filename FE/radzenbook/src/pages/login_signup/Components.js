@@ -6,7 +6,7 @@
  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
  position: relative;
  overflow: hidden;
- width: 678px;
+ width: 878px;
  max-width: 100%;
  min-height: 400px;
  `;
@@ -59,20 +59,21 @@
  export const Input = styled.input`
  background-color: #eee;
  border: none;
- padding: 12px 15px;
- margin: 8px 0;
+ padding: 10px 10px;
+ margin: 5px 0;
  width: 100%;
  `;
  
 
  export const Button = styled.button`
     border-radius: 20px;
-    border: 1px solid #ff4b2b;
-    background-color: #ff4b2b;
+    border: 1px solid #fc466b;
+    background-color: #fc466b;
     color: #ffffff;
     font-size: 12px;
     font-weight: bold;
     padding: 12px 45px;
+    margin-top: 15px;
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
@@ -108,9 +109,9 @@ ${props =>
 `;
 
 export const Overlay = styled.div`
-background: #ff416c;
-background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-background: linear-gradient(to right, #ff4b2b, #ff416c);
+background: #fc466b;
+background: -webkit-linear-gradient(to right, #3f5efb, #fc466b);
+background: linear-gradient(to right, #3f5efb, #fc466b);
 background-repeat: no-repeat;
 background-size: cover;
 background-position: 0 0;
@@ -156,5 +157,5 @@ ${props => (props.signinIn !== true ? `transform: translateX(50%);` : null)}
    font-weight: 100;
    line-height: 20px;
    letter-spacing: 0.5px;
-   margin: 20px 0 30px
+   margin: 20px 20px 30px 20px
  `;
