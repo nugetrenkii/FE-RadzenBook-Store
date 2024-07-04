@@ -12,6 +12,7 @@ import {
 } from "react-icons/ai";
 import { FaRegBell } from "react-icons/fa";
 import { BiMailSend, BiUser } from "react-icons/bi";
+import { IoIosLogOut } from "react-icons/io";
 import "react-multi-carousel/lib/styles.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { formatter } from "utils/formater";
@@ -19,6 +20,7 @@ import { ROUTERS } from "utils/router";
 import "./style.scss";
 import { categories } from "utils/common";
 import { useCart } from "pages/users/shoppingCartPage/CartContext";
+import { toast,ToastContainer } from "react-toastify";
 
 const HeaderUS = () => {
   const location = useLocation();
@@ -31,6 +33,12 @@ const HeaderUS = () => {
   const [selectedMenu, setSelectedMenu] = useState(null);
   const [selectedDropdown, setSelectedDropdown] = useState(null);
   const [notifications] = useState(3);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+    toast.success('Đăng xuất thành công!')
+  }
 
 
   useEffect(() => {
@@ -139,6 +147,9 @@ const HeaderUS = () => {
             <Link to="/login">
               <BiUser /> Đăng nhập
             </Link>
+            <Link to="/logout">
+              <BiUser /> Đăng xuất
+            </Link>
           </div>
         </div>
         <nav className="humberger__menu__nav">
@@ -204,6 +215,18 @@ const HeaderUS = () => {
       {/* Humberger End */}
 
       <header className="header">
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        />
         {/* Humberger Begin */}
         <div className="header__top">
           <div className="container">
@@ -246,6 +269,9 @@ const HeaderUS = () => {
                         <Link to="/login">
                           <BiUser />
                           <span>Đăng nhập</span>
+                        </Link>
+                        <Link onClick={() => handleLogout()}>
+                          <IoIosLogOut />
                         </Link>
                       </li>
                     </ul>

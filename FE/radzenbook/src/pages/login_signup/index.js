@@ -1,31 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Components from './Components';
 import { memo } from "react";
 import { LoginApi } from "services/AllServices";
 import { Alert, Snackbar } from "@mui/material";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
+import { ToastContainer, toast } from "react-toastify";
+import "../../../node_modules/react-toastify/dist/ReactToastify.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { Link, useNavigate } from "react-router-dom";
 
 const Login_signup = () => {
+    const navigate = useNavigate();
     const [signIn, toggle] = React.useState(true);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [alert, setAlert] = useState({ open: false, message: "" });
+    const [loadingApi, setLoadingAPI] = useState(false);
+
+    useEffect(() => {
+        let token = localStorage.getItem("token");
+        if (token) {
+            navigate("/");
+        }
+    }, [])
 
     const handleLogin = async (event) => {
         event.preventDefault();
         if (!email || !password) {
-            toast.error('Email or Password is required!');
+            toast.warning('Email or Password is required!');
             return;
         }
+        setLoadingAPI(true);
         let response = await LoginApi(email, password);
+        console.log('check response:>>>>>>', response);
         if (response && response.token) {
-            toast.success('Login successfully!');
-            localStorage.setItem("token", response.token);
-            console.log('check response:>>>>>>', response);
+            localStorage.setItem("token", response.token)
+            navigate('/');
+        } else {
+            if (response && response.status === 400) {
+                toast.error(response.data.error);
+            }
         }
+        setLoadingAPI(false);
 
     }
 
@@ -36,6 +54,18 @@ const Login_signup = () => {
                     {alert.message}
                 </Alert>
             </Snackbar>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             <Components.Container className="containerLogin">
                 <Components.SignUpContainer signinIn={signIn}>
                     <Components.Form>
@@ -54,10 +84,18 @@ const Login_signup = () => {
                         <Components.Input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
                         <Components.Input type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
                         <Components.Anchor href='#'>Quên mật khẩu?</Components.Anchor>
-                        <Components.Button type='submit'>Đăng nhập</Components.Button>
+                        <Components.Button type='submit'>
+                            {loadingApi && <FontAwesomeIcon icon={faSpinner} spin />}
+                            &nbsp;&nbsp;Đăng nhập
+                        </Components.Button>
                         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-                            <SiFacebook style={{ cursor: 'pointer', marginRight: '10px' }} />
-                            <FcGoogle style={{ cursor: 'pointer' }} />
+                            <Link to={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}>
+                                <SiFacebook style={{ cursor: 'pointer', marginRight: '10px' }} />
+                            </Link>
+                            <Link to={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}>
+                                <FcGoogle style={{ cursor: 'pointer' }} />
+                            </Link>
+
                         </div>
                     </Components.Form>
                 </Components.SignInContainer>

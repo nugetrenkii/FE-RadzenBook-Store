@@ -18,10 +18,6 @@ const ProductsPage = () => {
     "Đang giảm giá",
   ];
 
-  const handleAddToCart = (id) => {
-    // Xử lý thêm sản phẩm vào giỏ hàng ở đây
-    console.log(`Added product ${id} to cart`);
-  };
 
   return (
     <>
@@ -83,7 +79,6 @@ const ProductsPage = () => {
                     img={item.img}
                     name={item.name}
                     price={item.price}
-                    onAddToCart={handleAddToCart}
                   />
                 </div>
               ))}
