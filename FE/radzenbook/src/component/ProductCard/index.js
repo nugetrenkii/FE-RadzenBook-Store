@@ -5,6 +5,7 @@ import { formatter } from "utils/formater";
 import "./style.scss";
 import { ROUTERS } from "utils/router";
 import { useCart } from '../../pages/users/shoppingCartPage/CartContext';
+import { toast } from "react-toastify";
 
 const ProductCard = ({ id, img, name, price }) => {
   const { addToCart } = useCart();
@@ -19,6 +20,7 @@ const ProductCard = ({ id, img, name, price }) => {
       name,
       price
     });
+    toast.success('Đã thêm sản phẩm vào giỏ hàng!');
   };
   return (
     <>

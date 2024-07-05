@@ -1,5 +1,5 @@
 import { Box, IconButton, Typography, useTheme, Tooltip } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { token } from "../theme";
 import { mockDataTeam } from "../../data/mockData";
@@ -12,6 +12,7 @@ import FormDialog from "pages/admin/components/FormDialog";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { AllUser } from "services/AllServices";
 
 const Team = () => {
   const theme = useTheme();
@@ -19,25 +20,30 @@ const Team = () => {
   const [open, setOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
 
+
+  const [listUser, setListUser] = useState([]);
+
+  useEffect(() => {
+    getAllUser();
+  }, [])
+
+  const getAllUser = async () => {
+    let response = await AllUser();
+    console.log('resss', response);
+    if (response && response.data) {
+      setListUser(response.data)
+    }
+  }
+
+  console.log('list>>>>>>', listUser);
+
   const columns = [
     { field: "id", headerName: "ID" },
     {
-      field: "name",
-      headerName: "Name",
+      field: "first_name",
+      headerName: "First Name",
       flex: 1,
       cellClassName: "name-column--cell",
-    },
-    {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      headerAlign: "left",
-      align: "left",
-    },
-    {
-      field: "phone",
-      headerName: "Phone Number",
-      flex: 1,
     },
     {
       field: "email",
@@ -60,8 +66,8 @@ const Team = () => {
               access === "admin"
                 ? colors.greenAccent[600]
                 : access === "manager"
-                ? colors.greenAccent[700]
-                : colors.greenAccent[700]
+                  ? colors.greenAccent[700]
+                  : colors.greenAccent[700]
             }
             borderRadius="4px"
           >
@@ -150,10 +156,10 @@ const Team = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} onRowSelectionModelChange={handleSelectionModelChange}/>
+        <DataGrid checkboxSelection rows={listUser} columns={columns} onRowSelectionModelChange={handleSelectionModelChange} />
       </Box>
       <FormDialog open={open} onClose={() => setOpen(false)} initialValues={selectedRow} />
-      
+
     </Box>
   );
 };

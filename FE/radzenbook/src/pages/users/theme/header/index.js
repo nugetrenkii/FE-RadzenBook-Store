@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useState, useContext } from "react";
 import {
   AiOutlineDownCircle,
   AiOutlineFacebook,
@@ -12,6 +12,7 @@ import {
 } from "react-icons/ai";
 import { FaRegBell } from "react-icons/fa";
 import { BiMailSend, BiUser } from "react-icons/bi";
+import { IoIosLogOut } from "react-icons/io";
 import "react-multi-carousel/lib/styles.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { formatter } from "utils/formater";
@@ -19,6 +20,8 @@ import { ROUTERS } from "utils/router";
 import "./style.scss";
 import { categories } from "utils/common";
 import { useCart } from "pages/users/shoppingCartPage/CartContext";
+import { toast, ToastContainer } from "react-toastify";
+import { UserContext } from "../../../../context/UserContext";
 
 const HeaderUS = () => {
   const location = useLocation();
@@ -31,6 +34,16 @@ const HeaderUS = () => {
   const [selectedMenu, setSelectedMenu] = useState(null);
   const [selectedDropdown, setSelectedDropdown] = useState(null);
   const [notifications] = useState(3);
+
+  const { logout, user } = useContext(UserContext);
+
+  console.log('checkkk usserrr>>>>>>>>>>>', user);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+    toast.success('Đăng xuất thành công!')
+  }
 
 
   useEffect(() => {
@@ -136,9 +149,11 @@ const HeaderUS = () => {
         </div>
         <div className="humberger__menu__widget">
           <div className="header__top__right__auth">
-            <Link to="/login">
+            {user && user.auth === true ? <Link to="/logout">
+              <BiUser /> Đăng xuất
+            </Link> : <Link to="/login">
               <BiUser /> Đăng nhập
-            </Link>
+            </Link>}
           </div>
         </div>
         <nav className="humberger__menu__nav">
@@ -204,6 +219,18 @@ const HeaderUS = () => {
       {/* Humberger End */}
 
       <header className="header">
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         {/* Humberger Begin */}
         <div className="header__top">
           <div className="container">
@@ -222,6 +249,7 @@ const HeaderUS = () => {
                 <div className="header__top__right">
                   <div className="header__top__right__social">
                     <ul>
+                      {user && user.email && <span style={{ marginRight: 20, marginTop: -5 }}>Xin chào: {user.email}</span>}
                       <li>
                         <Link to="">
                           <AiOutlineFacebook />
@@ -243,10 +271,14 @@ const HeaderUS = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link to="/login">
-                          <BiUser />
-                          <span>Đăng nhập</span>
-                        </Link>
+                        {user && user.auth === true ?
+                          <Link className="logout-link" onClick={() => handleLogout()}>
+                            <IoIosLogOut />
+                            <span className="logout-text">Đăng xuất</span>
+                          </Link> :
+                          <Link to="/login">
+                            <BiUser /> Đăng nhập
+                          </Link>}
                       </li>
                     </ul>
                   </div>
