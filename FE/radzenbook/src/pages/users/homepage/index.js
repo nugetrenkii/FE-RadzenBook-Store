@@ -4,7 +4,7 @@ import feaImg4 from "assets/users/images/featured/hero-academy.jpg";
 import feaImg11 from "assets/users/images/featured/fire_force.jpg";
 import feaImg12 from "assets/users/images/featured/doraemon.jpg";
 
-import React, { memo, useEffect, useState } from "react";
+import React, { memo} from "react";
 import Carousel from "react-multi-carousel";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "./style.scss";
