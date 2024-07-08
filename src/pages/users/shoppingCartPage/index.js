@@ -11,14 +11,28 @@ import { useCart } from "./CartContext";
 
 const ShoppingCartPage = () => {
   const navigate = useNavigate();
-  const { cartItems, removeFromCart } = useCart();
+  const { cartItems, removeFromCart ,updateCartItemQuantity  } = useCart();
 
-  const updateCartItemQuantity = (itemId, newQuantity) => {
-    console.log("Updating item", itemId, "quantity to", newQuantity);
-  };
+  // const updateCartItemQuantity = (itemId, newQuantity) => {
+  //   console.log("Updating item", itemId, "quantity to", newQuantity);
+  // };
 
-  const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+  // const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  // const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+  const totalAmount = cartItems.reduce((total, item) => {
+    if (!isNaN(item.price) && !isNaN(item.quantity)) {
+      return total + item.price * item.quantity;
+    }
+    return total;
+  }, 0);
+
+  const totalQuantity = cartItems.reduce((total, item) => {
+    if (!isNaN(item.quantity)) {
+      return total + item.quantity;
+    }
+    return total;
+  }, 0);
 
   return (
     <>
@@ -42,15 +56,15 @@ const ShoppingCartPage = () => {
                     <img src={item.img[0]} alt="product-pic" />
                     <h4>{`${item.name}`}</h4>
                   </td>
-                  <td>{formatter(item.price)}</td>
+                  <td>{!isNaN(item.price) ? formatter(item.price) : "Invalid Price"}</td>
                   <td>
-                  <Quantity 
-                      quantity={item.quantity} 
-                      onQuantityChange={(newQuantity) => updateCartItemQuantity(item.id, newQuantity)} 
+                    <Quantity
+                      quantity={item.quantity}
+                      onQuantityChange={(newQuantity) => updateCartItemQuantity(item.id, newQuantity)}
                       hasAddToCart={false}
                     />
                   </td>
-                  <td>{formatter(item.price * item.quantity)}</td>
+                  <td>{!isNaN(item.price) && !isNaN(item.quantity) ? formatter(item.price * item.quantity) : "Invalid Amount"}</td>
                   <td className="icon_close" onClick={() => removeFromCart(item.id)}>
                     <AiOutlineClose />
                   </td>
