@@ -12,10 +12,12 @@ import { featProducts } from "utils/common";
 import { allProducts } from "utils/allProducts";
 import { ProductCard, Quantity } from "component";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useCart } from '../shoppingCartPage/CartContext';
 
 const ProductsDetailPage = () => {
   const { id } = useParams();
-
+  const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
@@ -28,6 +30,17 @@ const ProductsDetailPage = () => {
 
   const handleQuantityChange = (newQuantity) => {
     setQuantity(newQuantity);
+  };
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      img: product.img,
+      name: product.name,
+      price: product.price,
+      quantity
+    });
+    toast.success('Đã thêm sản phẩm vào giỏ hàng!');
   };
 
   return (
@@ -56,7 +69,7 @@ const ProductsDetailPage = () => {
             <Quantity 
               quantity={quantity} 
               onQuantityChange={handleQuantityChange} 
-
+              onAddToCart={handleAddToCart} 
             />
             <ul>
               <li>

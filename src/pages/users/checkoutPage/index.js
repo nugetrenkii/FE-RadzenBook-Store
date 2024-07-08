@@ -2,8 +2,20 @@ import BreadcrumbUS from "pages/users/theme/breadcrumb";
 import { memo } from "react";
 import "./style.scss";
 import { formatter } from "utils/formater";
+import { useCart } from '../shoppingCartPage/CartContext';
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutPage = () => {
+  const navigate = useNavigate();
+  const { cartItems } = useCart();
+
+  const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
+  const handleCheckout = () => {
+    toast.success('Thanh toán thành công!');
+    navigate("/");
+  }
   return (
     <>
       <BreadcrumbUS name={"Thanh Toán"} />
@@ -40,38 +52,32 @@ const CheckoutPage = () => {
             <div className="checkout__input">
               <label>Ghi chú:</label>
               <textarea rows={15} placeholder="Ghi chú về đơn hàng" />
+              <button type="button" className="button-submit">
+                Phương thức thanh toán
+            </button>
             </div>
+           
           </div>
           <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <div className="checkout__order">
               <h3>Đơn hàng </h3>
               <ul>
-                <li>
-                  <span>Conan</span>
-                  <b>{formatter(25000)} (1)</b>
-                </li>
-                <li>
-                  <span>Jujutsu Kaisen</span>
-                  <b>{formatter(30000)} (1)</b>
-                </li>
-                <li>
-                  <span>Kimetsu no Yaiba</span>
-                  <b>{formatter(30000)} (1)</b>
-                </li>
-                <li>
-                  <span>My Hero Academia</span>
-                  <b>{formatter(30000)} (1)</b>
-                </li>
+                {cartItems.map(item => (
+                  <li key={item.id}>
+                    <span>{item.name}</span>
+                    <b>{formatter(item.price)} ({item.quantity})</b>
+                  </li>
+                ))}
                 <li>
                   <h4>Mã giảm giá</h4>
                   <b>BOKS24</b>
                 </li>
                 <li className="checkout__order__subtotal">
                   <h3>Tổng đơn</h3>
-                  <b>{formatter(115000)}</b>
+                  <b>{formatter(totalAmount)}</b>
                 </li>
               </ul>
-              <button type="type" className="button-submit">
+              <button type="button" className="button-submit" onClick={handleCheckout}>
                 Đặt hàng
               </button>
             </div>
