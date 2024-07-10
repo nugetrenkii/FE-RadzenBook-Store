@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/FE-RadzenBook-Store/static/css/main.f9ca05f5.css",
-    "main.js": "/FE-RadzenBook-Store/static/js/main.682a9da6.js",
+    "main.js": "/FE-RadzenBook-Store/static/js/main.9208508d.js",
     "static/media/doraemon.jpg": "/FE-RadzenBook-Store/static/media/doraemon.ec49c26dd603c5a6d006.jpg",
     "static/media/duoc-su-tu-su.jpg": "/FE-RadzenBook-Store/static/media/duoc-su-tu-su.e115691ccd2d7022177a.jpg",
     "static/media/naruto.jpg": "/FE-RadzenBook-Store/static/media/naruto.3ad141b6985e1de96bd3.jpg",
@@ -26,10 +26,10 @@
     "static/media/be-vietnam-pro-vietnamese-400-normal.woff": "/FE-RadzenBook-Store/static/media/be-vietnam-pro-vietnamese-400-normal.69c7020eb25d25cf2794.woff",
     "index.html": "/FE-RadzenBook-Store/index.html",
     "main.f9ca05f5.css.map": "/FE-RadzenBook-Store/static/css/main.f9ca05f5.css.map",
-    "main.682a9da6.js.map": "/FE-RadzenBook-Store/static/js/main.682a9da6.js.map"
+    "main.9208508d.js.map": "/FE-RadzenBook-Store/static/js/main.9208508d.js.map"
   },
   "entrypoints": [
     "static/css/main.f9ca05f5.css",
-    "static/js/main.682a9da6.js"
+    "static/js/main.9208508d.js"
   ]
 }
