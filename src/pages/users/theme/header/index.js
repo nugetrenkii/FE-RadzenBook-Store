@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useState, useContext } from "react";
 import {
   AiOutlineDownCircle,
   AiOutlineFacebook,
@@ -20,7 +20,10 @@ import { ROUTERS } from "utils/router";
 import "./style.scss";
 import { categories } from "utils/common";
 import { useCart } from "pages/users/shoppingCartPage/CartContext";
-import { toast,ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import { UserContext } from "../../../../context/UserContext";
+import { MdAccountCircle } from "react-icons/md";
+
 
 const HeaderUS = () => {
   const location = useLocation();
@@ -34,8 +37,12 @@ const HeaderUS = () => {
   const [selectedDropdown, setSelectedDropdown] = useState(null);
   const [notifications] = useState(3);
 
+  const { logout, user } = useContext(UserContext);
+
+  console.log('checkkk usserrr>>>>>>>>>>>', user);
+
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    logout();
     navigate("/");
     toast.success('Đăng xuất thành công!')
   }
@@ -144,12 +151,11 @@ const HeaderUS = () => {
         </div>
         <div className="humberger__menu__widget">
           <div className="header__top__right__auth">
-            <Link to="/login">
-              <BiUser /> Đăng nhập
-            </Link>
-            <Link to="/logout">
+            {user && user.auth === true ? <Link to="/logout">
               <BiUser /> Đăng xuất
-            </Link>
+            </Link> : <Link to="/login">
+              <BiUser /> Đăng nhập
+            </Link>}
           </div>
         </div>
         <nav className="humberger__menu__nav">
@@ -216,16 +222,16 @@ const HeaderUS = () => {
 
       <header className="header">
         <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
         />
         {/* Humberger Begin */}
         <div className="header__top">
@@ -245,6 +251,7 @@ const HeaderUS = () => {
                 <div className="header__top__right">
                   <div className="header__top__right__social">
                     <ul>
+                      {user && user.email && <span style={{ marginRight: 20, marginTop: -5 }}>Xin chào: {user.email}</span>}
                       <li>
                         <Link to="">
                           <AiOutlineFacebook />
@@ -266,13 +273,14 @@ const HeaderUS = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link to="/login">
-                          <BiUser />
-                          <span>Đăng nhập</span>
-                        </Link>
-                        <Link onClick={() => handleLogout()}>
-                          <IoIosLogOut />
-                        </Link>
+                        {user && user.auth === true ?
+                          <Link className="logout-link" onClick={() => handleLogout()}>
+                            <IoIosLogOut />
+                            <span className="logout-text">Đăng xuất</span>
+                          </Link> :
+                          <Link to="/login">
+                            <BiUser /> Đăng nhập
+                          </Link>}
                       </li>
                     </ul>
                   </div>
@@ -344,6 +352,15 @@ const HeaderUS = () => {
                       <FaRegBell /> <span>{notifications}</span>
                     </Link>
                   </li>
+                  {/* <li className="dropdown">
+                    <Link >
+                      <MdAccountCircle />
+                    </Link>
+                    <div className="dropdown-content">
+                      <Link to="/tai-khoan">Tài khoản</Link>
+                      <Link to="/don-mua">Đơn mua</Link>
+                    </div>
+                  </li> */}
                 </ul>
               </div>
               <div className="humberger__open">

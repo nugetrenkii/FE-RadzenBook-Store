@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import * as Components from './Components';
 import { memo } from "react";
 import { LoginApi } from "services/AllServices";
@@ -10,6 +10,7 @@ import "../../../node_modules/react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "context/UserContext";
 
 const Login_signup = () => {
     const navigate = useNavigate();
@@ -19,12 +20,14 @@ const Login_signup = () => {
     const [alert, setAlert] = useState({ open: false, message: "" });
     const [loadingApi, setLoadingAPI] = useState(false);
 
-    useEffect(() => {
-        let token = localStorage.getItem("token");
-        if (token) {
-            navigate("/");
-        }
-    }, [])
+    const { loginContext } = useContext(UserContext);
+
+    // useEffect(() => {
+    //     let token = localStorage.getItem("token");
+    //     if (token) {
+    //         navigate("/");
+    //     }
+    // }, [])
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -34,9 +37,8 @@ const Login_signup = () => {
         }
         setLoadingAPI(true);
         let response = await LoginApi(email, password);
-        console.log('check response:>>>>>>', response);
         if (response && response.token) {
-            localStorage.setItem("token", response.token)
+            loginContext(email, response.token);
             navigate('/');
         } else {
             if (response && response.status === 400) {

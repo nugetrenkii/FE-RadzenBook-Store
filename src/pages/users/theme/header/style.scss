@@ -84,6 +84,23 @@ $bannerImg: "/assets/users/images/hero/banner3.jpg";
             color: map.get($theme-colors, "normal-text");
             margin-left: 5px;
         }
+
+        .logout-link {
+            display: flex;
+            align-items: center;
+            
+            .logout-text {
+              visibility: hidden;
+              opacity: 0;
+              margin-left: 8px;
+              transition: visibility 0s, opacity 0.3s;
+            }
+        
+            &:hover .logout-text {
+              visibility: visible;
+              opacity: 1;
+            }
+          }
     }
 }
 

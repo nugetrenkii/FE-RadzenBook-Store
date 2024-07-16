@@ -7,7 +7,7 @@ import { ROUTERS } from "utils/router";
 import { useCart } from '../../pages/users/shoppingCartPage/CartContext';
 import { toast } from "react-toastify";
 
-const ProductCard = ({ id, img, name, price }) => {
+const ProductCard = ({ id, img, name, price, quantity }) => {
   const { addToCart } = useCart();
   if (!id) {
     console.error("ProductCard: Missing 'id' prop");
@@ -18,7 +18,8 @@ const ProductCard = ({ id, img, name, price }) => {
       id,
       img,
       name,
-      price
+      price,
+      quantity
     });
     toast.success('Đã thêm sản phẩm vào giỏ hàng!');
   };
