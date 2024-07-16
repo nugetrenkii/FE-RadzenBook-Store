@@ -22,6 +22,8 @@ import { categories } from "utils/common";
 import { useCart } from "pages/users/shoppingCartPage/CartContext";
 import { toast, ToastContainer } from "react-toastify";
 import { UserContext } from "../../../../context/UserContext";
+import { MdAccountCircle } from "react-icons/md";
+
 
 const HeaderUS = () => {
   const location = useLocation();
@@ -350,6 +352,15 @@ const HeaderUS = () => {
                       <FaRegBell /> <span>{notifications}</span>
                     </Link>
                   </li>
+                  {/* <li className="dropdown">
+                    <Link >
+                      <MdAccountCircle />
+                    </Link>
+                    <div className="dropdown-content">
+                      <Link to="/tai-khoan">Tài khoản</Link>
+                      <Link to="/don-mua">Đơn mua</Link>
+                    </div>
+                  </li> */}
                 </ul>
               </div>
               <div className="humberger__open">
