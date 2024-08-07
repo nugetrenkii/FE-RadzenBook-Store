@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState, useEffect } from "react";
 import BreadcrumbUS from "pages/users/theme/breadcrumb";
 import "./style.scss";
 import { Link } from "react-router-dom";
@@ -6,8 +6,32 @@ import { categories } from "utils/common";
 import { ROUTERS } from "utils/router";
 import { ProductCard } from "component";
 import { allProducts } from "utils/allProducts";
+import ReactPaginate from "react-paginate";
 
 const ProductsPage = () => {
+
+  const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+  const productsPerPage = 12;
+
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const response = await fetch(`/api/users?page=${currentPage + 1}&limit=${productsPerPage}`);
+  //       const data = await response.json();
+  //       setProducts(data.products);
+  //       setPageCount(Math.ceil(data.total / productsPerPage));
+  //     } catch (error) {
+  //       console.error("Failed to fetch products", error);
+  //     }
+  //   };
+  //   fetchProducts();
+  // }, [currentPage]);
+
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
+  };
 
   const sorts = [
     "Giá thấp đến cao",
@@ -83,6 +107,19 @@ const ProductsPage = () => {
                 </div>
               ))}
             </div>
+            <ReactPaginate
+              previousLabel={"Trang trước"}
+              nextLabel={"Trang sau"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={handlePageClick}
+              containerClassName={"pagination"}
+              subContainerClassName={"pages pagination"}
+              activeClassName={"active"}
+            />
           </div>
         </div>
       </div>

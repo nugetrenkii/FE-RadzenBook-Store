@@ -5,6 +5,7 @@ export const ROUTERS = {
     PRODUCT_DETAIL: "/san-pham/chi-tiet/:id",
     SHOPPING_CART: "/gio-hang",
     CHECKOUT: "/thanh-toan",
+    ORDER_STATUS: "/order-status",
   },
   ADMIN: {
     HOME: "/admin",

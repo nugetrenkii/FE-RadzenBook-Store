@@ -7,6 +7,7 @@ import {
   ProductDetailPage,
   ShoppingCartPage,
   CheckoutPage,
+  OrderStatus,
   HomePageAdmin,
   Dashboard,
   Team,
@@ -52,6 +53,10 @@ const RouterCustom = () => {
     {
       path: ROUTERS.USER.CHECKOUT,
       component: <CheckoutPage />,
+    },
+    {
+      path: ROUTERS.USER.ORDER_STATUS,
+      component: <OrderStatus />,
     },
   ];
   const adminRouters = [

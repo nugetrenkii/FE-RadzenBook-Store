@@ -3,6 +3,7 @@ import { default as ProductsPage } from "./users/productsPage";
 import { default as ProductDetailPage } from "./users/productDetailPage";
 import { default as ShoppingCartPage } from "./users/shoppingCartPage";
 import { default as CheckoutPage } from "./users/checkoutPage";
+import { default as OrderStatus } from "./users/orderStatus";
 
 import { default as HomePageAdmin } from "./admin/homepage";
 import { default as Dashboard } from "./admin/scenes/dashboard";
@@ -20,6 +21,7 @@ export {
   ProductDetailPage,
   ShoppingCartPage,
   CheckoutPage,
+  OrderStatus,
   HomePageAdmin,
   Dashboard,
   Team,
