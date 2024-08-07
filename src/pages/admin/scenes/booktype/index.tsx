@@ -3,9 +3,9 @@ import { DataGrid } from "@mui/x-data-grid";
 import { token } from "../theme";
 import { mockAuthor } from "../../data/mockData";
 import Header from "../../components/Header";
-import { memo } from "react";
+import React, { memo } from "react";
 
-const Author = () => {
+const BookType = () => {
   const theme = useTheme();
   const colors = token(theme.palette.mode);
   const columns = [
@@ -20,7 +20,7 @@ const Author = () => {
 
   return (
     <Box m="20px">
-      <Header title="Tác giả" subtitle="List of Author Balances" />
+      <Header title="Thể loại sách" subtitle="List of BookType Balances" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -56,4 +56,4 @@ const Author = () => {
   );
 };
 
-export default memo(Author);
+export default memo(BookType);

@@ -1,15 +1,16 @@
 import { Box, useTheme } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { token } from "../theme";
 import { mockAuthor } from "../../data/mockData";
 import Header from "../../components/Header";
-import { memo } from "react";
+import React, { memo } from "react";
 
-const BookType = () => {
+const Author: React.FC = () => {
   const theme = useTheme();
   const colors = token(theme.palette.mode);
-  const columns = [
-    { field: "id", headerName: "ID" },
+  
+  const columns: GridColDef[] = [
+    { field: "id", headerName: "ID", width: 90 },
     {
       field: "name",
       headerName: "Tên",
@@ -20,7 +21,7 @@ const BookType = () => {
 
   return (
     <Box m="20px">
-      <Header title="Thể loại sách" subtitle="List of BookType Balances" />
+      <Header title="Tác giả" subtitle="List of Author Balances" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -56,4 +57,4 @@ const BookType = () => {
   );
 };
 
-export default memo(BookType);
+export default memo(Author);

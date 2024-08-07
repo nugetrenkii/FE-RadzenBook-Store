@@ -1,16 +1,16 @@
 import { Box } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar, GridColDef } from "@mui/x-data-grid";
 import { token } from "../theme";
 import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
-import { memo } from "react";
+import React, { memo } from "react";
 
 const Contacts = () => {
   const theme = useTheme();
   const colors = token(theme.palette.mode);
 
-  const columns = [
+  const columns: GridColDef[] = [
     { field: "id", headerName: "ID", flex: 0.5 },
     { field: "registrarId", headerName: "Registrar ID" },
     {

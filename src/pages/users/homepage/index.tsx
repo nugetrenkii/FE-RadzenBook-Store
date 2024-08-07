@@ -4,60 +4,28 @@ import feaImg4 from "assets/users/images/featured/hero-academy.jpg";
 import feaImg11 from "assets/users/images/featured/fire_force.jpg";
 import feaImg12 from "assets/users/images/featured/doraemon.jpg";
 
-import React, { memo} from "react";
+import React, { memo } from "react";
 import Carousel from "react-multi-carousel";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "./style.scss";
 import { featProducts } from "utils/common";
 import { ProductCard } from "component";
-// import { getAllProducts, getUsers, getProductById } from "api/api";
 
+interface Product {
+  id: string;
+  img: string[];
+  name: string;
+  price: number;
+}
 
-// if (loading) {
-//   return <p>Loading...</p>;
-// }
+interface FeaturedProducts {
+  [key: string]: {
+    title: string;
+    products: Product[];
+  };
+}
 
-// if (error) {
-//   return <p>Error: {error.message}</p>;
-// }
-
-const HomePage = () => {
-
-  // const [products, setProducts] = useState([]);
-  // const [featuredProduct, setFeaturedProduct] = useState(null);
-  // const [users, setUsers] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
-  // console.log('product', products)
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const productsData = await getAllProducts();
-  //       const usersData = await getUsers();
-  //       // const featuredProductData = await getProductById(1);
-  //       setProducts(productsData);
-  //       // setFeaturedProduct(featuredProductData);
-  //       setUsers(usersData);
-  //     } catch (error) {
-  //       setError(error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
-
-  // if (error) {
-  //   return <p>Error: {error.message}</p>;
-  // }
-
-
+const HomePage: React.FC = () => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -77,33 +45,33 @@ const HomePage = () => {
     },
   };
 
-  const renderFeaturedProducts = (data) => {
-    const tabList = [];
-    const tabPanels = [];
+  const renderFeaturedProducts = (data: FeaturedProducts) => {
+    const tabList: JSX.Element[] = [];
+    const tabPanels: JSX.Element[] = [];
 
     Object.keys(data).forEach((key, index) => {
       tabList.push(<Tab key={index}>{data[key].title}</Tab>);
 
-      const tabPanel = [];
-      data[key].products.forEach((item, index) => {
+      const tabPanel: JSX.Element[] = [];
+      data[key].products.forEach((item, productIndex) => {
         tabPanel.push(
-          <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" key={index}>
+          <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" key={productIndex}>
             <ProductCard id={item.id} img={item.img} name={item.name} price={item.price} />
           </div>
         );
       });
 
-      tabPanels.push(tabPanel);
+      tabPanels.push(
+        <TabPanel key={index}>
+          <div className="row">{tabPanel}</div>
+        </TabPanel>
+      );
     });
 
     return (
-      <Tabs defaultChecked={1}>
+      <Tabs defaultIndex={0}>
         <TabList>{tabList}</TabList>
-        {tabPanels.map((item, index) => (
-          <TabPanel key={index}>
-            <div className="row">{item}</div>
-          </TabPanel>
-        ))}
+        {tabPanels}
       </Tabs>
     );
   };
@@ -135,11 +103,7 @@ const HomePage = () => {
     <>
       {/* Categories Begin */}
       <div className="container container__categories__slider">
-        <Carousel
-          responsive={responsive}
-          className="categories__slider"
-        // autoPlay
-        >
+        <Carousel responsive={responsive} className="categories__slider">
           {sliderItems.map((item, key) => (
             <div
               key={key}
@@ -161,18 +125,6 @@ const HomePage = () => {
           {renderFeaturedProducts(featProducts)}
         </div>
       </div>
-      {/* Featured End */}
-
-      {/* Banner Begin */}
-      {/* <div className="container">
-        {users.map(item => 
-        <h2 key={item.id}>
-         {item.password}
-        </h2>
-        )
-        }
-      </div> */}
-      {/* Banner End */}
     </>
   );
 };
