@@ -99,11 +99,22 @@ const HeaderUS = () => {
       ],
     },
     {
-      name: "Bài viết",
+      name: "Tài khoản",
       path: "",
+      isShoSubMenu: false,
+      child: [
+        {
+          name: "Thông tin cá nhân",
+          path: "",
+        },
+        {
+          name: "Trạng thái đơn hàng",
+          path: "/order-status",
+        },
+      ],
     },
     {
-      name: "Liên hệ",
+      name: "Thông tin",
       path: "",
     },
   ]);
