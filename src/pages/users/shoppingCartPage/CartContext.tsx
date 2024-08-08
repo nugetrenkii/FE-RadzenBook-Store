@@ -1,12 +1,26 @@
-import { createContext, useState, useContext, useEffect } from 'react';
+import React,{ createContext, useState, useContext, useEffect, ReactNode } from 'react';
 
-const CartContext = createContext();
+interface CartItem {
+  id: number;
+  img: string[];
+  name: string;
+  price: number;
+  quantity: number;
+}
 
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(() => {
-    const savedCartItems = localStorage.getItem('cartItems');
-    return savedCartItems ? JSON.parse(savedCartItems) : [];
-  });
+interface CartContextProps {
+  cartItems: CartItem[];
+  addToCart: (item: CartItem) => void;
+  removeFromCart: (id: number) => void;
+  updateCartItemQuantity: (id: number, newQuantity: number) => void;
+  
+}
+
+
+const CartContext = createContext<CartContextProps | undefined>(undefined);
+
+export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
@@ -28,11 +42,11 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  const removeFromCart = (id) => {
+  const removeFromCart = (id: any) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
-  const updateCartItemQuantity = (id, newQuantity) => {
+  const updateCartItemQuantity = (id: any, newQuantity:any) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id ? { ...item, quantity: newQuantity } : item

@@ -29,72 +29,84 @@ export const featProducts = {
                 img: [feaImg1, feaImg1, feaImg1],
                 name: "Conan",
                 price: 25000,
+                quantity: 99
             },
             {
                 id: 2,
                 img: [feaImg2, feaImg2, feaImg2],
                 name: "Jujutsu Kaisen",
                 price: 30000,
+                quantity: 99
             },
             {
                 id: 3,
                 img: [feaImg3, feaImg3, feaImg3],
                 name: "Kimetsu no Yaiba",
                 price: 30000,
+                quantity: 99
             },
             {
                 id: 4,
                 img: [feaImg4, feaImg4, feaImg4],
                 name: "My Hero Academia",
                 price: 30000,
+                quantity: 99
             },
             {
                 id: 5,
                 img: [feaImg5, feaImg5, feaImg5],
                 name: "Naruto",
                 price: 30000,
+                quantity: 99
             },
             {
                 id: 6,
                 img: [feaImg6, feaImg6, feaImg6],
                 name: "One Piece",
                 price: 30000,
+                quantity: 99
             },
             {
                 id: 7,
                 img: [feaImg7, feaImg7, feaImg7],
                 name: "Spy X Family",
                 price: 30000,
+                quantity: 99
             },
             {
                 id: 8,
                 img: [feaImg8, feaImg8, feaImg8],
                 name: "Thi Tran Meo",
                 price: 30000,
+                quantity: 99
             },
             {
                 id: 9,
                 img: [feaImg9, feaImg9, feaImg9],
                 name: "Solo Leveling",
                 price: 397100,
+                quantity: 99
             },
             {
                 id: 10,
                 img: [feaImg10, feaImg10, feaImg10],
                 name: "Dược Sư Tự Sự",
                 price: 36660,
+                quantity: 99
             },
             {
                 id: 11,
                 img: [feaImg11, feaImg11, feaImg11],
                 name: "Fire Force",
                 price: 40850,
+                quantity: 99
             },
             {
                 id: 12,
                 img: [feaImg12, feaImg12, feaImg12],
                 name: "ドラえもん 26 - Doraemon 26",
                 price: 143450,
+                quantity: 99
             },
         ]
     },
@@ -106,18 +118,21 @@ export const featProducts = {
                 img: [feaImg7, feaImg7, feaImg7],
                 name: "Spy X Family",
                 price: 30000,
+                quantity: 99
             },
             {
                 id: 8,
                 img: [feaImg8, feaImg8, feaImg8],
                 name: "Thi Tran Meo",
                 price: 30000,
+                quantity: 99
             },
             {
                 id: 9,
                 img: [feaImg9, feaImg9, feaImg9],
                 name: "Solo Leveling",
                 price: 397100,
+                quantity: 99
             },
         ]
     },
@@ -129,48 +144,56 @@ export const featProducts = {
                 img: [feaImg2, feaImg2, feaImg2],
                 name: "Jujutsu Kaisen",
                 price: 30000,
+                quantity: 99
             },
             {
                 id: 3,
                 img: [feaImg3, feaImg3, feaImg3],
                 name: "Kimetsu no Yaiba",
                 price: 30000,
+                quantity: 99
             },
             {
                 id: 4,
                 img: [feaImg4, feaImg4, feaImg4],
                 name: "My Hero Academia",
                 price: 30000,
+                quantity: 99
             },
             {
                 id: 9,
                 img: [feaImg9, feaImg9, feaImg9],
                 name: "Solo Leveling",
                 price: 397100,
+                quantity: 99
             },
             {
                 id: 10,
                 img: [feaImg10, feaImg10, feaImg10],
                 name: "Dược Sư Tự Sự",
                 price: 36660,
+                quantity: 99
             },
             {
                 id: 11,
                 img: [feaImg11, feaImg11, feaImg11],
                 name: "Fire Force",
                 price: 40850,
+                quantity: 99
             },
             {
                 id: 7,
                 img: [feaImg7, feaImg7, feaImg7],
                 name: "Spy X Family",
                 price: 30000,
+                quantity: 99
             },
             {
                 id: 12,
                 img: [feaImg12, feaImg12, feaImg12],
                 name: "ドラえもん 26 - Doraemon 26",
                 price: 143450,
+                quantity: 99
             },
         ]
     },

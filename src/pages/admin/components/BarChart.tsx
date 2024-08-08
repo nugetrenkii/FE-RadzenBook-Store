@@ -2,6 +2,7 @@ import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 import { token } from "../scenes/theme";
 import { mockBarData as data } from "../data/mockData";
+import React from 'react'
 
 const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme();
@@ -68,7 +69,7 @@ const BarChart = ({ isDashboard = false }) => {
       ]}
       borderColor={{
         from: "color",
-        modifiers: [["darker", "1.6"]],
+        modifiers: [["darker", 1.6]],
       }}
       axisTop={null}
       axisRight={null}

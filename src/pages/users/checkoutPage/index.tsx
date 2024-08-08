@@ -1,12 +1,19 @@
 import BreadcrumbUS from "pages/users/theme/breadcrumb";
-import { memo } from "react";
+import React,{ memo } from "react";
 import "./style.scss";
 import { formatter } from "utils/formater";
 import { useCart } from '../shoppingCartPage/CartContext';
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const CheckoutPage = () => {
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
   const { cartItems } = useCart();
 
@@ -16,6 +23,7 @@ const CheckoutPage = () => {
     toast.success('Thanh toán thành công!');
     navigate("/");
   }
+
   return (
     <>
       <BreadcrumbUS name={"Thanh Toán"} />
@@ -54,13 +62,12 @@ const CheckoutPage = () => {
               <textarea rows={15} placeholder="Ghi chú về đơn hàng" />
               <button type="button" className="button-submit">
                 Phương thức thanh toán
-            </button>
+              </button>
             </div>
-           
           </div>
           <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12">
             <div className="checkout__order">
-              <h3>Đơn hàng </h3>
+              <h3>Đơn hàng</h3>
               <ul>
                 {cartItems.map(item => (
                   <li key={item.id}>

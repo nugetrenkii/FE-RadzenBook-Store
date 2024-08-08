@@ -1,26 +1,56 @@
-import { Box, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { token } from "../theme";
-import { mockAuthor } from "../../data/mockData";
+import { mockDataInvoices } from "../../data/mockData";
 import Header from "../../components/Header";
-import { memo } from "react";
+import React,{ memo } from "react";
 
-const Supplier = () => {
+const Invoices = () => {
   const theme = useTheme();
   const colors = token(theme.palette.mode);
   const columns = [
     { field: "id", headerName: "ID" },
     {
       field: "name",
-      headerName: "Tên",
+      headerName: "Têm",
       flex: 1,
       cellClassName: "name-column--cell",
+    },
+    {
+      field: "phone",
+      headerName: "Số điện thoại",
+      flex: 1,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      flex: 1,
+    },
+    {
+      field: "orders",
+      headerName: "Đơn hàng",
+      flex: 1,
+    },
+    {
+      field: "cost",
+      headerName: "Giá",
+      flex: 1,
+      renderCell: (params) => (
+        <Typography color={colors.greenAccent[500]}>
+          ${params.row.cost}
+        </Typography>
+      ),
+    },
+    {
+      field: "date",
+      headerName: "Ngày mua",
+      flex: 1,
     },
   ];
 
   return (
     <Box m="20px">
-      <Header title="Nhà cung cấp" subtitle="List of Supplier Balances" />
+      <Header title="Hóa đơn" subtitle="List of Invoice Balances" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -50,10 +80,10 @@ const Supplier = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockAuthor} columns={columns} />
+        <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns} />
       </Box>
     </Box>
   );
 };
 
-export default memo(Supplier);
+export default memo(Invoices);

@@ -1,10 +1,16 @@
 import { Box, useTheme } from "@mui/material";
 import { token } from "../scenes/theme";
+import React from "react";
+interface ProgressCircleProps {
+  progress?: number;  
+  size?: number;      
+}
 
-const ProgressCircle = ({ progress = "0.75", size = "40" }) => {
+const ProgressCircle: React.FC<ProgressCircleProps> = ({ progress = 0.75, size = 40 }) => {
   const theme = useTheme();
   const colors = token(theme.palette.mode);
   const angle = progress * 360;
+
   return (
     <Box
       sx={{

@@ -8,7 +8,7 @@ import { useCart } from '../../pages/users/shoppingCartPage/CartContext';
 import { toast } from "react-toastify";
 
 interface ProductCardProps {
-  id: string;
+  id: number;
   img: string[];
   name: string;
   price: number;

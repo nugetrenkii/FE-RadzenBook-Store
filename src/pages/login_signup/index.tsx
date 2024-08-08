@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, FormEvent } from "react";
 import * as Components from './Components';
 import { memo } from "react";
 import { LoginApi } from "services/AllServices";
@@ -7,46 +7,67 @@ import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
 import { ToastContainer, toast } from "react-toastify";
 import "../../../node_modules/react-toastify/dist/ReactToastify.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "context/UserContext";
+import { AxiosResponse } from "axios";
 
-const Login_signup = () => {
+interface AlertState {
+    open: boolean;
+    message: string;
+}
+
+interface SignInProps {
+    signinIn: boolean;
+}
+
+interface LoginResponse {
+    token: string;
+    status?: number;
+    data?: {
+        error?: string;
+    };
+}
+
+const LoginSignup: React.FC = () => {
     const navigate = useNavigate();
-    const [signIn, toggle] = React.useState(true);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [alert, setAlert] = useState({ open: false, message: "" });
-    const [loadingApi, setLoadingAPI] = useState(false);
+    const [signIn, toggle] = useState(true);
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [alert, setAlert] = useState<AlertState>({ open: false, message: "" });
+    const [loadingApi, setLoadingAPI] = useState<boolean>(false);
 
     const { loginContext } = useContext(UserContext);
 
-    // useEffect(() => {
-    //     let token = localStorage.getItem("token");
-    //     if (token) {
-    //         navigate("/");
-    //     }
-    // }, [])
+    useEffect(() => {
+        let token = localStorage.getItem("token");
+        if (token) {
+            navigate("/");
+        }
+    }, [navigate]);
 
-    const handleLogin = async (event) => {
+    const handleLogin = async (event: FormEvent) => {
         event.preventDefault();
         if (!email || !password) {
-            toast.warning('Email or Password is required!');
+            toast.warning('Email hoặc mật khẩu là bắt buộc!');
             return;
         }
         setLoadingAPI(true);
-        let response = await LoginApi(email, password);
-        if (response && response.token) {
-            loginContext(email, response.token);
-            navigate('/');
-        } else {
-            if (response && response.status === 400) {
-                toast.error(response.data.error);
+        try {
+            const response: AxiosResponse<LoginResponse> = await LoginApi(email, password);
+            if (response && response.data.token) {
+                loginContext(email, response.data.token);
+                navigate('/');
+            } else {
+                if (response.status === 400) {
+                    toast.error(response.data.status || 'Có lỗi xảy ra');
+                }
             }
+        } catch (error) {
+            toast.error('Đăng nhập thất bại, vui lòng thử lại sau.');
         }
         setLoadingAPI(false);
-
     }
 
     return (
@@ -97,7 +118,6 @@ const Login_signup = () => {
                             <Link to={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}>
                                 <FcGoogle style={{ cursor: 'pointer' }} />
                             </Link>
-
                         </div>
                     </Components.Form>
                 </Components.SignInContainer>
@@ -127,12 +147,9 @@ const Login_signup = () => {
 
                     </Components.Overlay>
                 </Components.OverlayContainer>
-
-
             </Components.Container>
         </div>
-
-    )
+    );
 }
 
-export default memo(Login_signup);
+export default memo(LoginSignup);

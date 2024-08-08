@@ -8,7 +8,11 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 
-const Topbar: React.FC = () => {
+interface TopbarProps {
+  setIsSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Topbar: React.FC<TopbarProps> = ({setIsSidebar}) => {
   const theme = useTheme();
   const colors = token(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
@@ -44,7 +48,7 @@ const Topbar: React.FC = () => {
         <IconButton>
           <SettingsOutlinedIcon />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={() => setIsSidebar(prev => !prev)}>
           <PersonOutlinedIcon />
         </IconButton>
       </Box>

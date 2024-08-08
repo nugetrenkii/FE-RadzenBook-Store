@@ -1,5 +1,5 @@
 import BreadcrumbUS from "pages/users/theme/breadcrumb";
-import { memo } from "react";
+import React,{ memo } from "react";
 import "./style.scss";
 import { Quantity } from "component";
 

@@ -1,5 +1,5 @@
 import BreadcrumbUS from "pages/users/theme/breadcrumb";
-import { memo, useEffect, useState } from "react";
+import React,{ memo, useEffect, useState } from "react";
 import {
   AiOutlineCopy,
   AiOutlineEye,
@@ -125,7 +125,7 @@ const ProductsDetailPage = () => {
         <div className="row">
           {featProducts.all.products.map((item, key) => (
             <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" key={key}>
-              <ProductCard id={item.id} img={item.img} name={item.name} price={item.price} />
+              <ProductCard id={item.id} img={item.img} name={item.name} price={item.price} quantity={item.quantity} />
             </div>
           ))}
         </div>

@@ -1,4 +1,4 @@
-import { memo } from "react";
+import React,{ memo } from "react";
 import "react-multi-carousel/lib/styles.css";
 import "./style.scss";
 import { Link } from "react-router-dom";

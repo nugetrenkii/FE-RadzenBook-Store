@@ -7,12 +7,11 @@ import {
   Button,
   Box,
   TextField,
+  useMediaQuery,
 } from "@mui/material";
-import { Formik, Field } from "formik";
+import { Formik, Field, FormikHelpers } from "formik";
 import * as yup from "yup";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import FormikSelect from "./FormikSelect";
-
 import Swal from "sweetalert2";
 
 const phoneRegExp = /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
@@ -33,7 +32,17 @@ const checkoutSchema = yup.object().shape({
   selectOption: yup.string().required("required"),
 });
 
-const initialValues = {
+interface FormValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  contact: string;
+  address1: string;
+  address2: string;
+  selectOption: string;
+}
+
+const initialValues: FormValues = {
   firstName: "",
   lastName: "",
   email: "",
@@ -43,18 +52,25 @@ const initialValues = {
   selectOption: "",
 };
 
-const FormDialog = ({ open, onClose, initialValues }) => {
+interface FormDialogProps {
+  open: boolean;
+  onClose: () => void;
+  initialValues?: FormValues;
+}
+
+const FormDialog: React.FC<FormDialogProps> = ({ open, onClose, initialValues }) => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
     Swal.fire({
       title: "Success",
       text: "Thêm thành công",
       icon: "success",
       showConfirmButton: false,
-      timer: 1500
+      timer: 1500,
     });
     console.log(values);
+    actions.setSubmitting(false);
     onClose(); // Close the dialog after form submission
   };
 
@@ -64,15 +80,7 @@ const FormDialog = ({ open, onClose, initialValues }) => {
       <DialogContent>
         <Formik
           onSubmit={handleFormSubmit}
-          initialValues={initialValues || {
-            firstName: "",
-            lastName: "",
-            email: "",
-            contact: "",
-            address1: "",
-            address2: "",
-            selectOption: "",
-          }}
+          initialValues={initialValues}
           validationSchema={checkoutSchema}
           enableReinitialize
         >
@@ -103,7 +111,7 @@ const FormDialog = ({ open, onClose, initialValues }) => {
                   value={values.firstName}
                   name="firstName"
                   error={!!touched.firstName && !!errors.firstName}
-                  helperText={touched.firstName && errors.firstName}
+                  helperText={touched.firstName && errors.firstName ? String(errors.firstName) : ""}
                   sx={{ gridColumn: "span 2" }}
                 />
                 <TextField
@@ -116,7 +124,7 @@ const FormDialog = ({ open, onClose, initialValues }) => {
                   value={values.lastName}
                   name="lastName"
                   error={!!touched.lastName && !!errors.lastName}
-                  helperText={touched.lastName && errors.lastName}
+                  helperText={touched.lastName && errors.lastName ? String(errors.lastName) : ""}
                   sx={{ gridColumn: "span 2" }}
                 />
                 <TextField
@@ -129,7 +137,7 @@ const FormDialog = ({ open, onClose, initialValues }) => {
                   value={values.email}
                   name="email"
                   error={!!touched.email && !!errors.email}
-                  helperText={touched.email && errors.email}
+                  helperText={touched.email && errors.email ? String(errors.email) : ""}
                   sx={{ gridColumn: "span 4" }}
                 />
                 <TextField
@@ -142,7 +150,7 @@ const FormDialog = ({ open, onClose, initialValues }) => {
                   value={values.contact}
                   name="contact"
                   error={!!touched.contact && !!errors.contact}
-                  helperText={touched.contact && errors.contact}
+                  helperText={touched.contact && errors.contact ? String(errors.contact) : ""}
                   sx={{ gridColumn: "span 4" }}
                 />
                 <TextField
@@ -155,7 +163,7 @@ const FormDialog = ({ open, onClose, initialValues }) => {
                   value={values.address1}
                   name="address1"
                   error={!!touched.address1 && !!errors.address1}
-                  helperText={touched.address1 && errors.address1}
+                  helperText={touched.address1 && errors.address1 ? String(errors.address1) : ""}
                   sx={{ gridColumn: "span 4" }}
                 />
                 <TextField
@@ -168,11 +176,11 @@ const FormDialog = ({ open, onClose, initialValues }) => {
                   value={values.address2}
                   name="address2"
                   error={!!touched.address2 && !!errors.address2}
-                  helperText={touched.address2 && errors.address2}
+                  helperText={touched.address2 && errors.address2 ? String(errors.address2) : ""}
                   sx={{ gridColumn: "span 4" }}
                 />
                 <Field name="selectOption">
-                  {({ field, form }) => (
+                  {({ field, form }: any) => (
                     <FormikSelect
                       name="selectOption"
                       label="Select Option"

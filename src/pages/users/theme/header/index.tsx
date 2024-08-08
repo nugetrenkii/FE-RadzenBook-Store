@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, useContext } from "react";
+import React,{ memo, useEffect, useState, useContext } from "react";
 import {
   AiOutlineDownCircle,
   AiOutlineFacebook,
@@ -283,7 +283,7 @@ const HeaderUS = () => {
                       </li>
                       <li>
                         {user && user.auth === true ?
-                          <Link className="logout-link" onClick={() => handleLogout()}>
+                          <Link to={''} className="logout-link" onClick={() => handleLogout()}>
                             <IoIosLogOut />
                             <span className="logout-text">Đăng xuất</span>
                           </Link> :
@@ -357,7 +357,7 @@ const HeaderUS = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link >
+                    <Link to={''}>
                       <FaRegBell /> <span>{notifications}</span>
                     </Link>
                   </li>

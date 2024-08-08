@@ -19,9 +19,10 @@ interface ItemProps {
   icon: JSX.Element;
   selected: string;
   setSelected: (title: string) => void;
+  isSidebar: boolean;
 }
 
-const Item: React.FC<ItemProps> = ({ title, to, icon, selected, setSelected }) => {
+const Item: React.FC<ItemProps> = ({ title, to, icon, selected, setSelected, isSidebar }) => {
   const theme = useTheme();
   const colors = token(theme.palette.mode);
   return (
@@ -39,7 +40,11 @@ const Item: React.FC<ItemProps> = ({ title, to, icon, selected, setSelected }) =
   );
 };
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+  isSidebar: boolean;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({isSidebar}) => {
   const theme = useTheme();
   const colors = token(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
@@ -127,6 +132,7 @@ const Sidebar: React.FC = () => {
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              isSidebar={isSidebar}
             />
 
             <Typography
@@ -142,6 +148,7 @@ const Sidebar: React.FC = () => {
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              isSidebar={isSidebar}
             />
             <Item
               title="Liên hệ"
@@ -149,6 +156,7 @@ const Sidebar: React.FC = () => {
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              isSidebar={isSidebar}
             />
             <Item
               title="Hóa đơn"
@@ -156,6 +164,7 @@ const Sidebar: React.FC = () => {
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              isSidebar={isSidebar}
             />
             <Item
               title="Tác giả"
@@ -163,6 +172,7 @@ const Sidebar: React.FC = () => {
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              isSidebar={isSidebar}
             />
             <Item
               title="Thể loại"
@@ -170,6 +180,7 @@ const Sidebar: React.FC = () => {
               icon={<StyleIcon />}
               selected={selected}
               setSelected={setSelected}
+              isSidebar={isSidebar}
             />
             <Item
               title="Nhà cung cấp"
@@ -177,6 +188,7 @@ const Sidebar: React.FC = () => {
               icon={<Diversity3OutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              isSidebar={isSidebar}
             />         
           </Box>
         </Menu>

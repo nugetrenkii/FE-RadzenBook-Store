@@ -12,10 +12,11 @@ import { featProducts } from "utils/common";
 import { ProductCard } from "component";
 
 interface Product {
-  id: string;
+  id: number;
   img: string[];
   name: string;
   price: number;
+  quantity: number;
 }
 
 interface FeaturedProducts {
@@ -56,7 +57,7 @@ const HomePage: React.FC = () => {
       data[key].products.forEach((item, productIndex) => {
         tabPanel.push(
           <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" key={productIndex}>
-            <ProductCard id={item.id} img={item.img} name={item.name} price={item.price} />
+            <ProductCard id={item.id} img={item.img} name={item.name} price={item.price} quantity={item.quantity} />
           </div>
         );
       });
