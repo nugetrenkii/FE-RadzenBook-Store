@@ -1,4 +1,4 @@
-import BreadcrumbUS from "pages/users/theme/breadcrumb";
+import BreadcrumbUS from "../../../pages/users/theme/breadcrumb";
 import React,{ memo, useEffect, useState } from "react";
 import {
   AiOutlineCopy,
@@ -6,11 +6,11 @@ import {
   AiOutlineFacebook,
   AiOutlineLinkedin,
 } from "react-icons/ai";
-import { formatter } from "utils/formater";
+import { formatter } from "../../../utils/formater";
 import "./style.scss";
-import { featProducts } from "utils/common";
-import { allProducts } from "utils/allProducts";
-import { ProductCard, Quantity } from "component";
+import { featProducts } from "../../../utils/common";
+import { allProducts } from "../../../utils/allProducts";
+import { ProductCard, Quantity } from "../../../component";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCart } from '../shoppingCartPage/CartContext';

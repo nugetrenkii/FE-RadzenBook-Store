@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, FormEvent } from "react";
 import * as Components from './Components';
 import { memo } from "react";
-import { LoginApi } from "services/AllServices";
+import { LoginApi } from "../../services/AllServices";
 import { Alert, Snackbar } from "@mui/material";
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
@@ -10,7 +10,7 @@ import "../../../node_modules/react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "context/UserContext";
+import { UserContext } from "../../context/UserContext";
 import { AxiosResponse } from "axios";
 
 interface AlertState {
@@ -33,11 +33,13 @@ interface LoginResponse {
 const LoginSignup: React.FC = () => {
     const navigate = useNavigate();
     const [signIn, toggle] = useState(true);
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [alert, setAlert] = useState<AlertState>({ open: false, message: "" });
     const [loadingApi, setLoadingAPI] = useState<boolean>(false);
 
+    console.log('email: ', email);
+    
     const { loginContext } = useContext(UserContext);
 
     useEffect(() => {
@@ -56,6 +58,8 @@ const LoginSignup: React.FC = () => {
         setLoadingAPI(true);
         try {
             const response: AxiosResponse<LoginResponse> = await LoginApi(email, password);
+            console.log('ressss', response);
+            
             if (response && response.data.token) {
                 loginContext(email, response.data.token);
                 navigate('/');

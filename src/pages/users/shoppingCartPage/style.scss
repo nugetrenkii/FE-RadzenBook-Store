@@ -1,5 +1,7 @@
 @use "sass:map";
-@import "style/pages/all";
+@use "../../../style/pages/all";
+@import "../../../style/pages/reponsive";
+@import "../../../style/pages/theme";
 
 
 .table__cart {

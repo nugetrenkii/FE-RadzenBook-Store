@@ -1,15 +1,15 @@
-import feaImg2 from "assets/users/images/featured/jjk-vol11.jpg";
-import feaImg3 from "assets/users/images/featured/kny.jpg";
-import feaImg4 from "assets/users/images/featured/hero-academy.jpg";
-import feaImg11 from "assets/users/images/featured/fire_force.jpg";
-import feaImg12 from "assets/users/images/featured/doraemon.jpg";
+import feaImg2 from "../../../assets/users/images/featured/jjk-vol11.jpg";
+import feaImg3 from "../../../assets/users/images/featured/kny.jpg";
+import feaImg4 from "../../../assets/users/images/featured/hero-academy.jpg";
+import feaImg11 from "../../../assets/users/images/featured/fire_force.jpg";
+import feaImg12 from "../../../assets/users/images/featured/doraemon.jpg";
 
 import React, { memo } from "react";
 import Carousel from "react-multi-carousel";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "./style.scss";
-import { featProducts } from "utils/common";
-import { ProductCard } from "component";
+import { featProducts } from "../../../utils/common";
+import { ProductCard } from "../../../component";
 
 interface Product {
   id: number;

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useMemo } from "react";
-import { createTheme } from "@mui/material/styles";
+import { createTheme, Theme } from "@mui/material/styles";
 
 export const token = (mode) => ({
   ...(mode === "dark"
@@ -214,5 +214,5 @@ export const useMode = () => {
 
   const theme = useMemo(() => createTheme(themeSetting(mode)), [mode]);
 
-  return [theme, colorsMode];
-}
+  return [theme, colorsMode] as [Theme, ColorModeContextType];  // Cung cấp kiểu chính xác cho TypeScript
+};

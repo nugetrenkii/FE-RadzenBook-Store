@@ -1,4 +1,4 @@
-import React, { useState, memo, ReactNode } from "react";
+import React, { useState, memo } from "react";
 import SideBar from "../scenes/global/SideBar";
 import Topbar from "../scenes/global/Topbar";
 import { ColorModeContext, useMode } from "../scenes/theme";
@@ -6,7 +6,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 
 interface HomePageAdminProps {
-  screen: ReactNode;
+  screen?: React.ReactNode;
   [key: string]: any; // to accept additional props
 }
 

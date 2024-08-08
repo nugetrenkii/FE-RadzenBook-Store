@@ -2,7 +2,7 @@ import React,{ memo } from "react";
 import "react-multi-carousel/lib/styles.css";
 import "./style.scss";
 import { Link } from "react-router-dom";
-import { ROUTERS } from "utils/router";
+import { ROUTERS } from "../../../../utils/router";
 
 const BreadcrumbUS = (props) => {
   return (

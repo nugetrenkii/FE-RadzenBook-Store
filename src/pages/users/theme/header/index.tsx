@@ -15,11 +15,11 @@ import { BiMailSend, BiUser } from "react-icons/bi";
 import { IoIosLogOut } from "react-icons/io";
 import "react-multi-carousel/lib/styles.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { formatter } from "utils/formater";
-import { ROUTERS } from "utils/router";
+import { formatter } from "../../../../utils/formater";
+import { ROUTERS } from "../../../../utils/router";
 import "./style.scss";
-import { categories } from "utils/common";
-import { useCart } from "pages/users/shoppingCartPage/CartContext";
+import { categories } from "../../../../utils/common";
+import { useCart } from "../../../../pages/users/shoppingCartPage/CartContext";
 import { toast, ToastContainer } from "react-toastify";
 import { UserContext } from "../../../../context/UserContext";
 

@@ -1,11 +1,11 @@
 import { memo, useState, useEffect } from "react";
-import BreadcrumbUS from "pages/users/theme/breadcrumb";
+import BreadcrumbUS from "../../../pages/users/theme/breadcrumb";
 import "./style.scss";
 import { Link } from "react-router-dom";
-import { categories } from "utils/common";
-import { ROUTERS } from "utils/router";
-import { ProductCard } from "component";
-import { allProducts } from "utils/allProducts";
+import { categories } from "../../../utils/common";
+import { ROUTERS } from "../../../utils/router";
+import { ProductCard } from "../../../component";
+import { allProducts } from "../../../utils/allProducts";
 import ReactPaginate from "react-paginate";
 
 const ProductsPage = () => {

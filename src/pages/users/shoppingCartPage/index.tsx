@@ -1,12 +1,12 @@
-import BreadcrumbUS from "pages/users/theme/breadcrumb";
+import BreadcrumbUS from "../../../pages/users/theme/breadcrumb";
 import React,{ memo } from "react";
 import "./style.scss";
-import { Quantity } from "component";
+import { Quantity } from "../../../component";
 
 import { AiOutlineClose } from "react-icons/ai";
-import { formatter } from "utils/formater";
+import { formatter } from "../../../utils/formater";
 import { useNavigate } from "react-router-dom";
-import { ROUTERS } from "utils/router";
+import { ROUTERS } from "../../../utils/router";
 import { useCart } from "./CartContext";
 
 const ShoppingCartPage = () => {

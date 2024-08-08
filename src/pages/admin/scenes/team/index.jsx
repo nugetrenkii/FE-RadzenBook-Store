@@ -8,11 +8,11 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import { memo } from "react";
-import FormDialog from "pages/admin/components/FormDialog";
+import FormDialog from "../../../../pages/admin/components/FormDialog";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { AllUser } from "services/AllServices";
+import { AllUser } from "../../../../services/AllServices";
 
 const Team = () => {
   const theme = useTheme();

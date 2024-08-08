@@ -1,9 +1,9 @@
 import React, { memo } from "react";
 import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
 import { Link, generatePath } from "react-router-dom";
-import { formatter } from "utils/formater";
+import { formatter } from "../../utils/formater";
 import "./style.scss";
-import { ROUTERS } from "utils/router";
+import { ROUTERS } from "../../utils/router";
 import { useCart } from '../../pages/users/shoppingCartPage/CartContext';
 import { toast } from "react-toastify";
 

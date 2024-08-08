@@ -1,7 +1,7 @@
-import BreadcrumbUS from "pages/users/theme/breadcrumb";
+import BreadcrumbUS from "../../../pages/users/theme/breadcrumb";
 import React,{ memo } from "react";
 import "./style.scss";
-import { formatter } from "utils/formater";
+import { formatter } from "../../../utils/formater";
 import { useCart } from '../shoppingCartPage/CartContext';
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";

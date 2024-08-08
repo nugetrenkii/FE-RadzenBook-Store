@@ -1,6 +1,7 @@
 
 @use "sass:map";
-@import "style/pages/all";
+@use "../../style/pages/all";
+@import "../../style/pages/theme";
 
 .quantity-container {
     color: map.get($theme-colors, "description");
