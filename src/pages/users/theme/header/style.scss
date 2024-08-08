@@ -1,6 +1,8 @@
 @use "sass:map";
-@use 'header';
-@import "style/pages/all";
+@use '../header/header';
+@use "../../../../style/pages/all";
+@import "../../../../style/pages/reponsive";
+@import "../../../../style/pages/theme";
 
 $bannerImg: "/assets/users/images/hero/banner3.jpg";
 
