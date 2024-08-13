@@ -1,5 +1,5 @@
-import { memo, useState, useEffect } from "react";
-import BreadcrumbUS from "../../../pages/users/theme/breadcrumb";
+import React, { memo, useState, useEffect } from "react";
+import BreadcrumbUS from "../theme/breadcrumb";
 import "./style.scss";
 import { Link } from "react-router-dom";
 import { categories } from "../../../utils/common";
@@ -8,11 +8,22 @@ import { ProductCard } from "../../../component";
 import { allProducts } from "../../../utils/allProducts";
 import ReactPaginate from "react-paginate";
 
-const ProductsPage = () => {
+interface Product {
+  id: number;
+  img: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
 
-  const [products, setProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
+interface PaginationData {
+  selected: number;
+}
+
+const ProductsPage: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [pageCount, setPageCount] = useState<number>(0);
   const productsPerPage = 12;
 
   // useEffect(() => {
@@ -29,7 +40,7 @@ const ProductsPage = () => {
   //   fetchProducts();
   // }, [currentPage]);
 
-  const handlePageClick = ({ selected }) => {
+  const handlePageClick = ({ selected }: PaginationData) => {
     setCurrentPage(selected);
   };
 
@@ -41,7 +52,6 @@ const ProductsPage = () => {
     "Bán chạy nhất",
     "Đang giảm giá",
   ];
-
 
   return (
     <>
@@ -103,6 +113,7 @@ const ProductsPage = () => {
                     img={item.img}
                     name={item.name}
                     price={item.price}
+                    quantity={item.quantity}
                   />
                 </div>
               ))}
@@ -117,7 +128,6 @@ const ProductsPage = () => {
               pageRangeDisplayed={5}
               onPageChange={handlePageClick}
               containerClassName={"pagination"}
-              subContainerClassName={"pages pagination"}
               activeClassName={"active"}
             />
           </div>
