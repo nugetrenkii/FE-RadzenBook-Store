@@ -1,0 +1,32 @@
+@use "sass:map";
+@import "../../../style/pages/all";
+@import "../../../style//pages/theme";
+
+.tab-content {
+    color: map.get($theme-colors, "main");
+}
+
+.order-list {
+    border-top: 1px solid #ddd;
+  }
+  
+  .order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .order-image {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .order-info {
+    flex-grow: 1;
+    margin-left: 20px;
+  }
+  
+  .order-price {
+    font-weight: bold;
+  }

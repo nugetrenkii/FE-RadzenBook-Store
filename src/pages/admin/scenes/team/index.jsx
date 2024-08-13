@@ -12,7 +12,7 @@ import FormDialog from "../../../../pages/admin/components/FormDialog";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { AllUser } from "../../../../services/AllServices";
+// import { AllUser } from "../../../../services/AllServices";
 
 const Team = () => {
   const theme = useTheme();
@@ -21,19 +21,19 @@ const Team = () => {
   const [selectedRow, setSelectedRow] = useState(null);
 
 
-  const [listUser, setListUser] = useState([]);
+  // const [listUser, setListUser] = useState([]);
 
-  useEffect(() => {
-    getAllUser();
-  }, [])
+  // useEffect(() => {
+  //   getAllUser();
+  // }, [])
 
-  const getAllUser = async () => {
-    let response = await AllUser();
-    console.log('resss', response);
-    if (response && response.data) {
-      setListUser(response.data)
-    }
-  }
+  // const getAllUser = async () => {
+  //   let response = await AllUser();
+  //   console.log('resss', response);
+  //   if (response && response.data) {
+  //     setListUser(response.data)
+  //   }
+  // }
 
   console.log('list>>>>>>', listUser);
 

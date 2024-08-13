@@ -14,25 +14,24 @@ import {
   Invoices,
   Authors,
   Types,
-  Supplier
-} from ".";
+  Supplier,
+  OrderStatusTest
+} from "../pages";
 import MasterUsLayout from "./users/theme/masterUsLayout";
 import { CartProvider } from "./users/shoppingCartPage/CartContext";
 import Login_signup from "./login_signup";
 import { UserContext } from "../context/UserContext";
 
 const RouterCustom = () => {
-  const { user, loginContext } = useContext(UserContext);
+  // const { user, loginContext } = useContext(UserContext);
 
-  useEffect (() =>{
-    if(localStorage.getItem("token")){
-      console.log('>>>>>>>>>>>>>', localStorage.getItem('token'));
-      
-      loginContext(localStorage.getItem("email"), localStorage.getItem("token"))
-    }
-  }, [])
+  // useEffect (() =>{
+  //   if(localStorage.getItem("token")){
+  //     loginContext(localStorage.getItem("email"), localStorage.getItem("token"))
+  //   }
+  // }, [])
 
-  console.log('check user>>>>>>', user);
+  // console.log('check user>>>>>>', user);
 
   const userRouters = [
     {
@@ -54,6 +53,10 @@ const RouterCustom = () => {
     {
       path: ROUTERS.USER.CHECKOUT,
       component: <CheckoutPage />,
+    },
+    {
+      path: ROUTERS.USER.ORDER_STATUS,
+      component: <OrderStatusTest />,
     },
   ];
   const adminRouters = [

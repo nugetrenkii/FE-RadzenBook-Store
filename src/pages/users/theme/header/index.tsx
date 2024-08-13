@@ -22,8 +22,7 @@ import { categories } from "../../../../utils/common";
 import { useCart } from "../../../../pages/users/shoppingCartPage/CartContext";
 import { toast, ToastContainer } from "react-toastify";
 import { UserContext } from "../../../../context/UserContext";
-import { MdAccountCircle } from "react-icons/md";
-
+import NotificationBell from "../../../../component/NotificationBell";
 
 const HeaderUS = () => {
   const location = useLocation();
@@ -35,18 +34,24 @@ const HeaderUS = () => {
   const [isShowCategories, setIsShowCategories] = useState(isHome);
   const [selectedMenu, setSelectedMenu] = useState(null);
   const [selectedDropdown, setSelectedDropdown] = useState(null);
-  const [notifications] = useState(3);
+  const notifications = 5; // Giả sử bạn có 5 thông báo
+  const notificationList = [
+    { id: 1, message: "New order received" },
+    { id: 2, message: "Order #1234 has been shipped" },
+    { id: 3, message: "Order #5678 has been delivered" },
+    { id: 4, message: "You have a new message" },
+    { id: 5, message: "Your order #7890 has been cancelled" },
+  ];
 
   const { logout, user } = useContext(UserContext);
 
-  console.log('checkkk usserrr>>>>>>>>>>>', user);
+  // console.log('checkkk usserrr>>>>>>>>>>>', user);
 
   const handleLogout = () => {
     logout();
     navigate("/");
-    toast.success('Đăng xuất thành công!')
-  }
-
+    toast.success("Đăng xuất thành công!");
+  };
 
   useEffect(() => {
     const savedSelectedMenu = localStorage.getItem("selectedMenu");
@@ -60,7 +65,6 @@ const HeaderUS = () => {
       setSelectedDropdown(savedSelectedDropdown);
     }
   }, []);
-
 
   useEffect(() => {
     if (selectedMenu !== null) {
@@ -127,20 +131,28 @@ const HeaderUS = () => {
     setIsShowCategories(isHome);
   }, [location]);
 
-  const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const totalAmount = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+  const totalQuantity = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
 
   return (
     <>
       {/* Humberger Begin */}
       <div
-        className={`humberger__menu__overlay ${isShowHumberger ? "active" : ""
-          }`}
+        className={`humberger__menu__overlay ${
+          isShowHumberger ? "active" : ""
+        }`}
         onClick={() => setIsShowHumberger(false)}
       />
       <div
-        className={`humberger__menu__wrapper ${isShowHumberger ? "show__humberger__menu__wrapper" : ""
-          }`}
+        className={`humberger__menu__wrapper ${
+          isShowHumberger ? "show__humberger__menu__wrapper" : ""
+        }`}
       >
         <div
           className="header__logo"
@@ -162,11 +174,15 @@ const HeaderUS = () => {
         </div>
         <div className="humberger__menu__widget">
           <div className="header__top__right__auth">
-            {user && user.auth === true ? <Link to="/logout">
-              <BiUser /> Đăng xuất
-            </Link> : <Link to="/login">
-              <BiUser /> Đăng nhập
-            </Link>}
+            {user && user.auth === true ? (
+              <Link to="/logout">
+                <BiUser /> Đăng xuất
+              </Link>
+            ) : (
+              <Link to="/login">
+                <BiUser /> Đăng nhập
+              </Link>
+            )}
           </div>
         </div>
         <nav className="humberger__menu__nav">
@@ -192,8 +208,9 @@ const HeaderUS = () => {
                 </Link>
                 {menu.child && (
                   <ul
-                    className={`header__menu__dropdown ${menu.isShoSubMenu ? "show__submenu" : ""
-                      }`}
+                    className={`header__menu__dropdown ${
+                      menu.isShoSubMenu ? "show__submenu" : ""
+                    }`}
                   >
                     {menu.child.map((childItem, childKey) => (
                       <li key={`${menuKey}-${childKey}`}>
@@ -262,7 +279,11 @@ const HeaderUS = () => {
                 <div className="header__top__right">
                   <div className="header__top__right__social">
                     <ul>
-                      {user && user.email && <span style={{ marginRight: 20, marginTop: -5 }}>Xin chào: {user.email}</span>}
+                      {user && user.email && (
+                        <span style={{ marginRight: 20, marginTop: -5 }}>
+                          Xin chào: {user.email}
+                        </span>
+                      )}
                       <li>
                         <Link to="">
                           <AiOutlineFacebook />
@@ -284,14 +305,20 @@ const HeaderUS = () => {
                         </Link>
                       </li>
                       <li>
-                        {user && user.auth === true ?
-                          <Link to={''} className="logout-link" onClick={() => handleLogout()}>
+                        {user && user.auth === true ? (
+                          <Link
+                            to={''}
+                            className="logout-link"
+                            onClick={() => handleLogout()}
+                          >
                             <IoIosLogOut />
                             <span className="logout-text">Đăng xuất</span>
-                          </Link> :
+                          </Link>
+                        ) : (
                           <Link to="/login">
                             <BiUser /> Đăng nhập
-                          </Link>}
+                          </Link>
+                        )}
                       </li>
                     </ul>
                   </div>
@@ -316,7 +343,12 @@ const HeaderUS = () => {
               <nav className="header__menu">
                 <ul>
                   {menus.map((menu, menuKey) => (
-                    <li key={menuKey} className={`${menuKey === 0 ? "active" : ""} ${selectedMenu === menuKey ? "selected" : ""}`}>
+                    <li
+                      key={menuKey}
+                      className={`${menuKey === 0 ? "active" : ""} ${
+                        selectedMenu === menuKey ? "selected" : ""
+                      }`}
+                    >
                       <Link
                         to={menu.path}
                         onClick={(e) => {
@@ -333,11 +365,22 @@ const HeaderUS = () => {
                       {menu.child && (
                         <ul className="header__menu__dropdown">
                           {menu.child.map((childItem, childKey) => (
-                            <li key={`${menuKey}-${childKey}`} className={selectedDropdown === `${menuKey}-${childKey}` ? "selected-dropdown" : ""}>
-                              <Link to={childItem.path}
+                            <li
+                              key={`${menuKey}-${childKey}`}
+                              className={
+                                selectedDropdown === `${menuKey}-${childKey}`
+                                  ? "selected-dropdown"
+                                  : ""
+                              }
+                            >
+                              <Link
+                                to={childItem.path}
                                 onClick={(e) => {
                                   setSelectedDropdown(`${menuKey}-${childKey}`);
-                                }}>{childItem.name}</Link>
+                                }}
+                              >
+                                {childItem.name}
+                              </Link>
                             </li>
                           ))}
                         </ul>
@@ -354,14 +397,11 @@ const HeaderUS = () => {
                 </div>
                 <ul>
                   <li>
-                    <Link to={ROUTERS.USER.SHOPPING_CART}>
-                      <AiOutlineShoppingCart /> <span>{totalQuantity}</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to={''}>
-                      <FaRegBell /> <span>{notifications}</span>
-                    </Link>
+                    <NotificationBell
+                      totalQuantity={totalQuantity}
+                      notifications={notifications}
+                      notificationList={notificationList}
+                    />
                   </li>
                   {/* <li className="dropdown">
                     <Link >
