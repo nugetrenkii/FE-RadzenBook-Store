@@ -1,7 +1,7 @@
 import React, { createContext, useState, ReactNode } from 'react';
 
 interface User {
-  email: string;
+  username: string;
   auth: boolean;
 }
 
@@ -12,7 +12,7 @@ interface UserContextProps {
 }
 
 const UserContext = createContext<UserContextProps>({
-  user: { email: '', auth: false },
+  user: { username: '', auth: false },
   loginContext: () => {},
   logout: () => {},
 });
@@ -22,18 +22,18 @@ interface UserProviderProps {
 }
 
 const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User>({ email: '', auth: false });
+  const [user, setUser] = useState<User>({ username: '', auth: false });
 
-  const loginContext = (email: string, token: string) => {
-    setUser({ email, auth: true });
+  const loginContext = (username: string, token: string) => {
+    setUser({ username, auth: true });
     localStorage.setItem('token', token);
-    localStorage.setItem('email', email);
+    localStorage.setItem('username', username);
   };
 
   const logout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('email');
-    setUser({ email: '', auth: false });
+    localStorage.removeItem('username');
+    setUser({ username: '', auth: false });
   };
 
   return (

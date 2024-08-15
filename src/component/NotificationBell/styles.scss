@@ -14,14 +14,15 @@
   font-weight: 500;
   position: absolute;
   padding: 0px 7px;
-}
-ul {
-  list-style: none;
-  display: inline-block;
-  margin-right: 15px;
-  align-items: center;
-
-  li {
-    position: relative;
+  ul {
+    list-style: none;
+    display: inline-block;
+    margin-right: 15px;
+    align-items: center;
+  
+    li {
+      position: relative;
+    }
   }
 }
+

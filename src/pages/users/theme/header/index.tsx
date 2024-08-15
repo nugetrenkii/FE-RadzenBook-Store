@@ -10,7 +10,7 @@ import {
   AiOutlineTwitter,
   AiOutlineUpCircle,
 } from "react-icons/ai";
-import { FaRegBell } from "react-icons/fa";
+// import { FaRegBell } from "react-icons/fa";
 import { BiMailSend, BiUser } from "react-icons/bi";
 import { IoIosLogOut } from "react-icons/io";
 import "react-multi-carousel/lib/styles.css";
@@ -279,9 +279,9 @@ const HeaderUS = () => {
                 <div className="header__top__right">
                   <div className="header__top__right__social">
                     <ul>
-                      {user && user.email && (
+                      {user && user.username && (
                         <span style={{ marginRight: 20, marginTop: -5 }}>
-                          Xin chào: {user.email}
+                          Xin chào: {user.username}
                         </span>
                       )}
                       <li>

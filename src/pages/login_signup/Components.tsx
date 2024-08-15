@@ -12,12 +12,12 @@ export const Container = styled.div`
   overflow: hidden;
   width: 878px;
   max-width: 100%;
-  min-height: 400px;
+  min-height: 600px;
 `;
 
 export const SignUpContainer = styled.div<ContainerProps>`
   position: absolute;
-  top: 0;
+  top: 10;
   height: 100%;
   transition: all 0.6s ease-in-out;
   left: 0;
@@ -159,4 +159,20 @@ export const Paragraph = styled.p`
   line-height: 20px;
   letter-spacing: 0.5px;
   margin: 20px 20px 30px 20px;
+`;
+
+export const RadioContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+`;
+
+export const RadioInput = styled.input.attrs({ type: 'radio' })`
+  margin-right: 10px;
+`;
+
+export const RadioLabel = styled.label`
+  font-size: 14px;
+  color: #333;
+  margin-right: 20px;
 `;

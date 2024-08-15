@@ -23,15 +23,15 @@ import Login_signup from "./login_signup";
 import { UserContext } from "../context/UserContext";
 
 const RouterCustom = () => {
-  // const { user, loginContext } = useContext(UserContext);
+  const { user, loginContext } = useContext(UserContext);
 
-  // useEffect (() =>{
-  //   if(localStorage.getItem("token")){
-  //     loginContext(localStorage.getItem("email"), localStorage.getItem("token"))
-  //   }
-  // }, [])
+  useEffect (() =>{
+    if(localStorage.getItem("token")){
+      loginContext(localStorage.getItem("username"), localStorage.getItem("token"))
+    }
+  }, [])
 
-  // console.log('check user>>>>>>', user);
+  console.log('check user>>>>>>', user);
 
   const userRouters = [
     {
