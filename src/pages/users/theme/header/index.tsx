@@ -403,15 +403,6 @@ const HeaderUS = () => {
                       notificationList={notificationList}
                     />
                   </li>
-                  {/* <li className="dropdown">
-                    <Link >
-                      <MdAccountCircle />
-                    </Link>
-                    <div className="dropdown-content">
-                      <Link to="/tai-khoan">Tài khoản</Link>
-                      <Link to="/don-mua">Đơn mua</Link>
-                    </div>
-                  </li> */}
                 </ul>
               </div>
               <div className="humberger__open">

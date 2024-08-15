@@ -35,7 +35,7 @@ const Team = () => {
   //   }
   // }
 
-  console.log('list>>>>>>', listUser);
+  // console.log('list>>>>>>', listUser);
 
   const columns = [
     { field: "id", headerName: "ID" },
@@ -156,7 +156,7 @@ const Team = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={listUser} columns={columns} onRowSelectionModelChange={handleSelectionModelChange} />
+        {/* <DataGrid checkboxSelection rows={listUser} columns={columns} onRowSelectionModelChange={handleSelectionModelChange} /> */}
       </Box>
       <FormDialog open={open} onClose={() => setOpen(false)} initialValues={selectedRow} />
 
