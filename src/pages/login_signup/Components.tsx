@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface ContainerProps {
   signinIn?: boolean;
+  signUpIn?: boolean;
 }
 
 export const Container = styled.div`
@@ -10,9 +11,9 @@ export const Container = styled.div`
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   position: relative;
   overflow: hidden;
-  width: 878px;
+  width: 1000px;
   max-width: 100%;
-  min-height: 600px;
+  min-height: 700px;
 `;
 
 export const SignUpContainer = styled.div<ContainerProps>`

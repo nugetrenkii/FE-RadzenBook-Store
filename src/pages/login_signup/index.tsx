@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, FormEvent } from "react";
 import * as Components from './Components';
 import { memo } from "react";
-import { LoginApi } from "../../services/AllServices";
+import { LoginApi, SignUpApi } from "../../services/AllServices";
 import { Alert, Snackbar } from "@mui/material";
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
@@ -19,10 +19,6 @@ interface AlertState {
     message: string;
 }
 
-// interface SignInProps {
-//     signinIn: boolean;
-// }
-
 interface LoginResponse {
     token: string;
     status?: number;
@@ -38,7 +34,17 @@ const LoginSignup: React.FC = () => {
     const [password, setPassword] = useState("");
     const [alert, setAlert] = useState<AlertState>({ open: false, message: "" });
     const [loadingApi, setLoadingAPI] = useState<boolean>(false);
-    const [gender, setGender] = useState(true); 
+
+
+    //sign up
+    const [usernameSignUp, setUsernameSignUp] = useState("");
+    const [gender, setGender] = useState(true);
+    const [passwordSU, setPasswordSU] = useState("");
+    const [fullname, setFullname] = useState("");
+    const [email, setEmail] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [numberPhone, setNumberPhone] = useState("");
+    const [address, setAddress] = useState("");
 
     const { loginContext } = useContext(UserContext);
 
@@ -48,6 +54,35 @@ const LoginSignup: React.FC = () => {
             navigate("/");
         }
     }, [navigate]);
+
+    const handleSignup = async (event: FormEvent) => {
+        event.preventDefault();
+
+        if (!fullname || !email || !usernameSignUp || !passwordSU || !confirmPassword || !numberPhone || !address) {
+            toast.warning("Vui lòng điền đầy đủ thông tin!");
+            return;
+        }
+        if (passwordSU !== confirmPassword) {
+            toast.warning("Mật khẩu xác nhận không khớp!");
+            return;
+        }
+        setLoadingAPI(true);
+        try {
+            const response = await SignUpApi(fullname, email, usernameSignUp, passwordSU, numberPhone, gender, address, confirmPassword);
+            console.log("response: ", response.data);
+
+            if (response.data.code === 200 && response.data) {
+                toast.success(response.data.message);
+                navigate("/login");
+            } else {
+                toast.error(response.data.message);
+            }
+        } catch (error: any) {
+            console.error("error: ", error);
+            toast.error("Đăng ký thất bại, vui lòng thử lại sau.");
+        }
+        setLoadingAPI(false);
+    };
 
     const handleLogin = async (event: FormEvent) => {
         event.preventDefault();
@@ -103,21 +138,24 @@ const LoginSignup: React.FC = () => {
             />
             <Components.Container className="0">
                 <Components.SignUpContainer signinIn={signIn}>
-                    <Components.Form>
+                    <Components.Form onSubmit={handleSignup}>
                         <Components.Title>Tạo tài khoản</Components.Title>
-                        <Components.Input type='text' placeholder='Full Name' />
-                        <Components.Input type='email' placeholder='Email' />
-                        <Components.Input type='phone' placeholder='Number Phone' />
+                        <Components.Input type='text' placeholder='Full Name'value={fullname} onChange={(e) => setFullname(e.target.value)} />
+                        <Components.Input type='email' placeholder='Email'value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <Components.Input type='text' placeholder='Username' value={usernameSignUp} onChange={(e) => setUsernameSignUp(e.target.value)} />
+                        <Components.Input type='phone' placeholder='Number Phone' value={numberPhone} onChange={(e) => setNumberPhone(e.target.value)}/>
                         <RadioContainer>
                             <RadioInput id="male" name="gender" value="true" checked={gender === true} onChange={() => setGender(true)} />
                             <RadioLabel htmlFor="male">Nam</RadioLabel>
                             <RadioInput id="female" name="gender" value="false" checked={gender === false} onChange={() => setGender(false)} />
                             <RadioLabel htmlFor="female">Nữ</RadioLabel>
                         </RadioContainer>
-                        <Components.Input type='text' placeholder='Address' />
-                        <Components.Input type='password' placeholder='Password' />
-                        <Components.Input type='password' placeholder='Confirm Password' />
-                        <Components.Button>Đăng ký</Components.Button>
+                        <Components.Input type='text' placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)}/>
+                        <Components.Input type='password' placeholder='Password' value={passwordSU} onChange={(e) => setPasswordSU(e.target.value)}/>
+                        <Components.Input type='password' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+                        <Components.Button type='submit'> 
+                            {loadingApi && <FontAwesomeIcon icon={faSpinner} spin />}
+                            &nbsp;&nbsp;Đăng ký</Components.Button>
                     </Components.Form>
                 </Components.SignUpContainer>
 
