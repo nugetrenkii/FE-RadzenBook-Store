@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/FE-RadzenBook-Store/static/css/main.1d765155.css",
+    "main.js": "/FE-RadzenBook-Store/static/js/main.1e894ce4.js",
+    "static/media/doraemon.jpg": "/FE-RadzenBook-Store/static/media/doraemon.ec49c26dd603c5a6d006.jpg",
+    "static/media/duoc-su-tu-su.jpg": "/FE-RadzenBook-Store/static/media/duoc-su-tu-su.e115691ccd2d7022177a.jpg",
+    "static/media/naruto.jpg": "/FE-RadzenBook-Store/static/media/naruto.3ad141b6985e1de96bd3.jpg",
+    "static/media/onepiece.jpg": "/FE-RadzenBook-Store/static/media/onepiece.40a9ebc2e17552ca4bac.jpg",
+    "static/media/fire_force.jpg": "/FE-RadzenBook-Store/static/media/fire_force.5ef6eca35e230bf0e25f.jpg",
+    "static/media/kny.jpg": "/FE-RadzenBook-Store/static/media/kny.211480215b68ef95d9e2.jpg",
+    "static/media/thi-tran-meo.jpg": "/FE-RadzenBook-Store/static/media/thi-tran-meo.b1ea52873011ffd773a0.jpg",
+    "static/media/jjk-vol11.jpg": "/FE-RadzenBook-Store/static/media/jjk-vol11.599f6d4cd94eaa5a757d.jpg",
+    "static/media/hero-academy.jpg": "/FE-RadzenBook-Store/static/media/hero-academy.2ffa04e72a050549a806.jpg",
+    "static/media/solo_level.jpg": "/FE-RadzenBook-Store/static/media/solo_level.600fc474d7c0b1656667.jpg",
+    "static/media/spyXfamily.jpg": "/FE-RadzenBook-Store/static/media/spyXfamily.876b01aa4d196a47bb89.jpg",
+    "static/media/conan.jpg": "/FE-RadzenBook-Store/static/media/conan.a062c4d35e292cb30884.jpg",
+    "static/media/banner3.jpg": "/FE-RadzenBook-Store/static/media/banner3.fda04d19af677305a9e4.jpg",
+    "static/media/be-vietnam-pro-latin-400-normal.woff2": "/FE-RadzenBook-Store/static/media/be-vietnam-pro-latin-400-normal.27d7609ea11544718ef8.woff2",
+    "static/media/be-vietnam-pro-latin-400-normal.woff": "/FE-RadzenBook-Store/static/media/be-vietnam-pro-latin-400-normal.cd4862ab7a14b2e574eb.woff",
+    "static/media/be-vietnam-pro-latin-ext-400-normal.woff2": "/FE-RadzenBook-Store/static/media/be-vietnam-pro-latin-ext-400-normal.82e105ea3d2be67ace15.woff2",
+    "static/media/revicons.eot": "/FE-RadzenBook-Store/static/media/revicons.a77de540a38981833f9e.eot",
+    "static/media/revicons.ttf": "/FE-RadzenBook-Store/static/media/revicons.57fd05d4ae650374c8de.ttf",
+    "static/media/be-vietnam-pro-vietnamese-400-normal.woff2": "/FE-RadzenBook-Store/static/media/be-vietnam-pro-vietnamese-400-normal.1ac573b4b2c95f9275ee.woff2",
+    "static/media/be-vietnam-pro-latin-ext-400-normal.woff": "/FE-RadzenBook-Store/static/media/be-vietnam-pro-latin-ext-400-normal.55b6d057118888561ffa.woff",
+    "static/media/revicons.woff": "/FE-RadzenBook-Store/static/media/revicons.e8746a624ed098489406.woff",
+    "static/media/be-vietnam-pro-vietnamese-400-normal.woff": "/FE-RadzenBook-Store/static/media/be-vietnam-pro-vietnamese-400-normal.69c7020eb25d25cf2794.woff",
+    "index.html": "/FE-RadzenBook-Store/index.html",
+    "main.1d765155.css.map": "/FE-RadzenBook-Store/static/css/main.1d765155.css.map",
+    "main.1e894ce4.js.map": "/FE-RadzenBook-Store/static/js/main.1e894ce4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1d765155.css",
+    "static/js/main.1e894ce4.js"
+  ]
+}
