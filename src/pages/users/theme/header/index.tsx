@@ -49,7 +49,7 @@ const HeaderUS = () => {
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    navigate("/login");
     toast.success("Đăng xuất thành công!");
   };
 

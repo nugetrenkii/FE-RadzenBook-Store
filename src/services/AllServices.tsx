@@ -24,28 +24,28 @@ const GetRolesUserById = async (userId) => {
 const LoginApi = (userName: string, password: string) => {
   const token = AuthUtils.getTokenFromStorage();
   return axios.post(
-      "/api/Account/Login",
-      { userName, password },
-      {
-          headers: {
-              'Authorization': `Bearer ${token}`,
-              'Content-Type': 'application/json',
-          },
-          withCredentials: true,
-      }
+    "/api/Account/Login",
+    { userName, password },
+    {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+    }
   );
 };
 
 const SignUpApi = (fullname: string, email: string, username: string, passWord: string, numberPhone: string, gender: boolean, address: string, confirmPassWord: string) => {
   return axios.post(
-      "api/Account/SignUpUserAsync",
-      { fullname, email, username, passWord, numberPhone, gender, address, confirmPassWord },
-      {
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          withCredentials: true
-      }
+    "api/Account/SignUpUserAsync",
+    { fullname, email, username, passWord, numberPhone, gender, address, confirmPassWord },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true
+    }
   );
 };
 

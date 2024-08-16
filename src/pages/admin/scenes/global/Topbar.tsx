@@ -1,5 +1,6 @@
 import { Box, IconButton, InputBase, useTheme } from "@mui/material";
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { ColorModeContext, token } from "../theme";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
@@ -7,6 +8,9 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+import { UserContext } from "../../../../context/UserContext";
+import { toast } from "react-toastify";
+import SettingsMenu from "../../components/Setting"; 
 
 interface TopbarProps {
   setIsSidebar: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,6 +20,15 @@ const Topbar: React.FC<TopbarProps> = ({setIsSidebar}) => {
   const theme = useTheme();
   const colors = token(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const navigate = useNavigate();
+
+  const { logout } = useContext(UserContext);
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+    toast.success("Đăng xuất thành công!");
+  };
 
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
@@ -46,7 +59,7 @@ const Topbar: React.FC<TopbarProps> = ({setIsSidebar}) => {
           <NotificationsOutlinedIcon />
         </IconButton>
         <IconButton>
-          <SettingsOutlinedIcon />
+        <SettingsMenu onLogout={handleLogout} />
         </IconButton>
         <IconButton onClick={() => setIsSidebar(prev => !prev)}>
           <PersonOutlinedIcon />

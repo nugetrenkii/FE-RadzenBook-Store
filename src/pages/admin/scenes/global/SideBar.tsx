@@ -13,6 +13,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import StyleIcon from "@mui/icons-material/Style";
 import Diversity3OutlinedIcon from "@mui/icons-material/Diversity3Outlined";
 
+
 interface ItemProps {
   title: string;
   to: string;
@@ -49,6 +50,8 @@ const Sidebar: React.FC<SidebarProps> = ({isSidebar}) => {
   const colors = token(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>("Dashboard");
+
+  const username = localStorage.getItem('username');
 
   return (
     <Box
@@ -105,7 +108,7 @@ const Sidebar: React.FC<SidebarProps> = ({isSidebar}) => {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`https://scontent.fhan2-3.fna.fbcdn.net/v/t39.30808-1/439008443_1136874487559135_8410186692348239684_n.jpg?stp=dst-jpg_p200x200&_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeF7A7N-QxPsgNQ14fSE1YGLATtoZb89UkEBO2hlvz1SQdIyibRPn290PVbCKH5L2Jy6v790xnA3Vle3sMR6brfT&_nc_ohc=yn7gAW5Ge4MQ7kNvgG2o1v2&_nc_ht=scontent.fhan2-3.fna&oh=00_AYCgLSaBKkWkU6jYxWd8YuNZkrFxkRJTyK7Wh2kr4I7CFw&oe=664D505D`}
+                  src={`https://m.yodycdn.com/blog/hinh-anh-meo-hai-huoc-yodyvn58.jpg`}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -116,7 +119,7 @@ const Sidebar: React.FC<SidebarProps> = ({isSidebar}) => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Tần
+                  {username}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   BookStack Admin

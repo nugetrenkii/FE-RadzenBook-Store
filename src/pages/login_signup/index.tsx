@@ -103,8 +103,12 @@ const LoginSignup: React.FC = () => {
 
             if (response && response["token"]) {
                 localStorage.setItem("token", response["token"]);
-                loginContext(username, response["token"]);
-                navigate('/');
+                loginContext(username, response["token"], response['role']);
+                if(response['role'] === 'KhachHang'){
+                    navigate('/');
+                }else if(response['role'] === 'Admin'){
+                    navigate('/admin');
+                }
             } else {
                 if (response.status === 400) {
                     toast.error('Có lỗi xảy ra');

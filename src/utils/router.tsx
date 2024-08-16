@@ -27,5 +27,6 @@ export const ROUTERS = {
   LOGIN: {
     SIGNIN: "/login",
     SIGNUP: "/register",
+    UNAUTHORIZED: "/unauthorized"
   }
 };

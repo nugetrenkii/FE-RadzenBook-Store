@@ -7,7 +7,7 @@ interface User {
 
 interface UserContextProps {
   user: User;
-  loginContext: (email: string, token: string) => void;
+  loginContext: (email: string, token: string, role: string) => void;
   logout: () => void;
 }
 
@@ -24,15 +24,17 @@ interface UserProviderProps {
 const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User>({ username: '', auth: false });
 
-  const loginContext = (username: string, token: string) => {
+  const loginContext = (username: string, token: string, role: string) => {
     setUser({ username, auth: true });
     localStorage.setItem('token', token);
     localStorage.setItem('username', username);
+    localStorage.setItem('role', role);
   };
 
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    localStorage.removeItem('role');
     setUser({ username: '', auth: false });
   };
 

@@ -13,12 +13,6 @@ const ShoppingCartPage = () => {
   const navigate = useNavigate();
   const { cartItems, removeFromCart ,updateCartItemQuantity  } = useCart();
 
-  // const updateCartItemQuantity = (itemId, newQuantity) => {
-  //   console.log("Updating item", itemId, "quantity to", newQuantity);
-  // };
-
-  // const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-  // const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   const totalAmount = cartItems.reduce((total, item) => {
     if (!isNaN(item.price) && !isNaN(item.quantity)) {
