@@ -44,6 +44,7 @@ const SignUpApi = (fullname: string, email: string, username: string, passWord: 
           headers: {
               'Content-Type': 'application/json',
           },
+          withCredentials: true
       }
   );
 };
