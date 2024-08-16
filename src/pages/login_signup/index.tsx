@@ -27,6 +27,7 @@ interface LoginResponse {
     };
 }
 
+
 const LoginSignup: React.FC = () => {
     const navigate = useNavigate();
     const [signIn, toggle] = useState(true);
@@ -69,17 +70,19 @@ const LoginSignup: React.FC = () => {
         setLoadingAPI(true);
         try {
             const response = await SignUpApi(fullname, email, usernameSignUp, passwordSU, numberPhone, gender, address, confirmPassword);
-            console.log("response: ", response.data);
-
-            if (response.data.code === 200 && response.data) {
-                toast.success(response.data.message);
-                navigate("/login");
+            console.log("response: ", response);
+ 
+            if ( response['code'] === 200) {
+                toast.success(response["message"]);
+                window.location.reload();
+            } else if (response.status === 400) {
+                toast.error(response.data.message);
             } else {
                 toast.error(response.data.message);
             }
         } catch (error: any) {
             console.error("error: ", error);
-            toast.error("Đăng ký thất bại, vui lòng thử lại sau.");
+            toast.error("Đăng ký thất bại, vui lòng thử lại sau. Error catch");
         }
         setLoadingAPI(false);
     };
@@ -140,20 +143,20 @@ const LoginSignup: React.FC = () => {
                 <Components.SignUpContainer signinIn={signIn}>
                     <Components.Form onSubmit={handleSignup}>
                         <Components.Title>Tạo tài khoản</Components.Title>
-                        <Components.Input type='text' placeholder='Full Name'value={fullname} onChange={(e) => setFullname(e.target.value)} />
-                        <Components.Input type='email' placeholder='Email'value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <Components.Input type='text' placeholder='Full Name' value={fullname} onChange={(e) => setFullname(e.target.value)} />
+                        <Components.Input type='email' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
                         <Components.Input type='text' placeholder='Username' value={usernameSignUp} onChange={(e) => setUsernameSignUp(e.target.value)} />
-                        <Components.Input type='phone' placeholder='Number Phone' value={numberPhone} onChange={(e) => setNumberPhone(e.target.value)}/>
+                        <Components.Input type='phone' placeholder='Number Phone' value={numberPhone} onChange={(e) => setNumberPhone(e.target.value)} />
                         <RadioContainer>
                             <RadioInput id="male" name="gender" value="true" checked={gender === true} onChange={() => setGender(true)} />
                             <RadioLabel htmlFor="male">Nam</RadioLabel>
                             <RadioInput id="female" name="gender" value="false" checked={gender === false} onChange={() => setGender(false)} />
                             <RadioLabel htmlFor="female">Nữ</RadioLabel>
                         </RadioContainer>
-                        <Components.Input type='text' placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)}/>
-                        <Components.Input type='password' placeholder='Password' value={passwordSU} onChange={(e) => setPasswordSU(e.target.value)}/>
-                        <Components.Input type='password' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
-                        <Components.Button type='submit'> 
+                        <Components.Input type='text' placeholder='Address' value={address} onChange={(e) => setAddress(e.target.value)} />
+                        <Components.Input type='password' placeholder='Password' value={passwordSU} onChange={(e) => setPasswordSU(e.target.value)} />
+                        <Components.Input type='password' placeholder='Confirm Password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                        <Components.Button type='submit'>
                             {loadingApi && <FontAwesomeIcon icon={faSpinner} spin />}
                             &nbsp;&nbsp;Đăng ký</Components.Button>
                     </Components.Form>
