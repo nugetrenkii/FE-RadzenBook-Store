@@ -12,7 +12,6 @@ import FormDialog from "../../../../pages/admin/components/FormDialog";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveIcon from '@mui/icons-material/Remove';
-// import { AllUser } from "../../../../services/AllServices";
 
 const Team = () => {
   const theme = useTheme();
@@ -20,22 +19,6 @@ const Team = () => {
   const [open, setOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
 
-
-  // const [listUser, setListUser] = useState([]);
-
-  // useEffect(() => {
-  //   getAllUser();
-  // }, [])
-
-  // const getAllUser = async () => {
-  //   let response = await AllUser();
-  //   console.log('resss', response);
-  //   if (response && response.data) {
-  //     setListUser(response.data)
-  //   }
-  // }
-
-  // console.log('list>>>>>>', listUser);
 
   const columns = [
     { field: "id", headerName: "ID" },
@@ -156,7 +139,7 @@ const Team = () => {
           },
         }}
       >
-        {/* <DataGrid checkboxSelection rows={listUser} columns={columns} onRowSelectionModelChange={handleSelectionModelChange} /> */}
+        <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} onRowSelectionModelChange={handleSelectionModelChange} />
       </Box>
       <FormDialog open={open} onClose={() => setOpen(false)} initialValues={selectedRow} />
 

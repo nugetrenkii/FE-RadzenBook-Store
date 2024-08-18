@@ -51,8 +51,14 @@ const LoginSignup: React.FC = () => {
 
     useEffect(() => {
         let token = localStorage.getItem("token");
+        let role = localStorage.getItem('role');
         if (token) {
-            navigate("/");
+            if(role === 'KhachHang'){
+                navigate("/");
+            }else if(role === 'Admin'){
+                navigate("/admin");
+            }
+            
         }
     }, [navigate]);
 

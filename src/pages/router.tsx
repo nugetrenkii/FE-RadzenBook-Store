@@ -23,6 +23,7 @@ import Login_signup from "./login_signup";
 import { UserContext } from "../context/UserContext";
 import UnauthorizedPage from "../component/Unauthorized";
 import PrivateRoute from "src/component/PrivateRoute";
+import Profile from "./admin/scenes/profile";
 
 const RouterCustom = () => {
   const { user, loginContext } = useContext(UserContext);
@@ -100,6 +101,11 @@ const RouterCustom = () => {
     {
       path: ROUTERS.ADMIN.SUPPLIER,
       component: <Supplier />,
+      // requiredRole: 'Admin',
+    },
+    {
+      path: ROUTERS.ADMIN.PROFILE,
+      component: <Profile />,
       // requiredRole: 'Admin',
     },
   ];

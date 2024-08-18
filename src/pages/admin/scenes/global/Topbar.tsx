@@ -61,7 +61,7 @@ const Topbar: React.FC<TopbarProps> = ({setIsSidebar}) => {
         <IconButton>
         <SettingsMenu onLogout={handleLogout} />
         </IconButton>
-        <IconButton onClick={() => setIsSidebar(prev => !prev)}>
+        <IconButton onClick={() => navigate('/profile')}>
           <PersonOutlinedIcon />
         </IconButton>
       </Box>

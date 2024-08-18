@@ -15,14 +15,8 @@ export const ROUTERS = {
     INVOICES: "/invoices",
     AUTHOR: "/authors",
     TYPE: "/types",
-    SUPPLIER: "/suppliers"
-    // FORM: '/form',
-    // BAR: '/bar',
-    // PIE: '/pie',
-    // LINE: '/line',
-    // FAQ:'FAQ',
-    // GEOGRAPHY: "/geography",
-    // CALENDAR: "/calendar"
+    SUPPLIER: "/suppliers",
+    PROFILE: "/profile",
   },
   LOGIN: {
     SIGNIN: "/login",
