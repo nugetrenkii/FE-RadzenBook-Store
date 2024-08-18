@@ -54,8 +54,8 @@ const HeaderUS = () => {
   };
 
   useEffect(() => {
-    const savedSelectedMenu = localStorage.getItem("selectedMenu");
-    const savedSelectedDropdown = localStorage.getItem("selectedDropdown");
+    const savedSelectedMenu = sessionStorage.getItem("selectedMenu");
+    const savedSelectedDropdown = sessionStorage.getItem("selectedDropdown");
 
     if (savedSelectedMenu) {
       setSelectedMenu(parseInt(savedSelectedMenu, 10));
@@ -68,11 +68,11 @@ const HeaderUS = () => {
 
   useEffect(() => {
     if (selectedMenu !== null) {
-      localStorage.setItem("selectedMenu", selectedMenu);
+      sessionStorage.setItem("selectedMenu", selectedMenu);
     }
 
     if (selectedDropdown !== null) {
-      localStorage.setItem("selectedDropdown", selectedDropdown);
+      sessionStorage.setItem("selectedDropdown", selectedDropdown);
     }
   }, [selectedMenu, selectedDropdown]);
 

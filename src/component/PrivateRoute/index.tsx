@@ -2,14 +2,14 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 const useAuth = () => {
-  const role = localStorage.getItem('role');
+  const role = sessionStorage.getItem('role');
   return role === 'Admin';
 };
 
 const PrivateRoute: React.FC<{ element: React.ReactElement }> = ({ element }) => {
   const isAuth = useAuth();
   
-  const isLoggedIn = !!localStorage.getItem('token');
+  const isLoggedIn = !!sessionStorage.getItem('token');
 
   if (!isLoggedIn) {
     return <Navigate to="/login" />;

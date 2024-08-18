@@ -22,6 +22,10 @@ interface AlertState {
 interface LoginResponse {
     token: string;
     status?: number;
+    fullName: string,
+    email: string,
+    numberPhone: string,
+    address: string
     data?: {
         error?: string;
     };
@@ -50,15 +54,15 @@ const LoginSignup: React.FC = () => {
     const { loginContext } = useContext(UserContext);
 
     useEffect(() => {
-        let token = localStorage.getItem("token");
-        let role = localStorage.getItem('role');
+        let token = sessionStorage.getItem("token");
+        let role = sessionStorage.getItem('role');
         if (token) {
-            if(role === 'KhachHang'){
+            if (role === 'KhachHang') {
                 navigate("/");
-            }else if(role === 'Admin'){
+            } else if (role === 'Admin') {
                 navigate("/admin");
             }
-            
+
         }
     }, [navigate]);
 
@@ -77,8 +81,8 @@ const LoginSignup: React.FC = () => {
         try {
             const response = await SignUpApi(fullname, email, usernameSignUp, passwordSU, numberPhone, gender, address, confirmPassword);
             console.log("response: ", response);
- 
-            if ( response['code'] === 200) {
+
+            if (response['code'] === 200) {
                 toast.success(response["message"]);
                 window.location.reload();
             } else if (response.status === 400) {
@@ -105,14 +109,14 @@ const LoginSignup: React.FC = () => {
 
         try {
             const response: AxiosResponse<LoginResponse> = await LoginApi(username, password);
-            console.log('response.data: ', response);
+            console.log('response.data: ', response["fullName"]);
 
             if (response && response["token"]) {
-                localStorage.setItem("token", response["token"]);
-                loginContext(username, response["token"], response['role']);
-                if(response['role'] === 'KhachHang'){
+                sessionStorage.setItem("token", response["token"]);
+                loginContext(username, response["token"], response['role'], response["fullName"], response["email"], response["numberPhone"], response["address"]);
+                if (response['role'] === 'KhachHang') {
                     navigate('/');
-                }else if(response['role'] === 'Admin'){
+                } else if (response['role'] === 'Admin') {
                     navigate('/admin');
                 }
             } else {

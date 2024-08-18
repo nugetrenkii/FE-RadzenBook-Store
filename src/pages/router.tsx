@@ -29,8 +29,8 @@ const RouterCustom = () => {
   const { user, loginContext } = useContext(UserContext);
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      loginContext(localStorage.getItem("username"), localStorage.getItem("token"), localStorage.getItem("role"))
+    if (sessionStorage.getItem("token")) {
+      loginContext(sessionStorage.getItem("username"), sessionStorage.getItem("token"), sessionStorage.getItem("role"),sessionStorage.getItem("fullname"),sessionStorage.getItem("email"),sessionStorage.getItem("numberPhone"),sessionStorage.getItem("address"))
     }
   }, [])
 

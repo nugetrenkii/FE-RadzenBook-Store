@@ -51,7 +51,7 @@ const Sidebar: React.FC<SidebarProps> = ({isSidebar}) => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const [selected, setSelected] = useState<string>("Dashboard");
 
-  const username = localStorage.getItem('username');
+  const username = sessionStorage.getItem('username');
 
   return (
     <Box

@@ -15,7 +15,7 @@ const AuthUtils = {
           'tenant': 'root'
         }});
       const token = response.data.token;
-      // Lưu trữ token trong localStorage
+      // Lưu trữ token trong sessionStorage
       AuthUtils.setToken(token);
       return token;
     } catch (error) {
@@ -24,19 +24,19 @@ const AuthUtils = {
     }
   },
 
-  // Hàm để lưu trữ token trong localStorage
+  // Hàm để lưu trữ token trong sessionStorage
   setToken: (token) => {
-    localStorage.setItem('authToken', token);
+    sessionStorage.setItem('authToken', token);
   },
 
-  // Hàm để lấy token từ localStorage
+  // Hàm để lấy token từ sessionStorage
   getTokenFromStorage: () => {
-    return localStorage.getItem('authToken');
+    return sessionStorage.getItem('authToken');
   },
 
-  // Hàm để xóa token từ localStorage
+  // Hàm để xóa token từ sessionStorage
   clearToken: () => {
-    localStorage.removeItem('authToken');
+    sessionStorage.removeItem('authToken');
   },
 };
 

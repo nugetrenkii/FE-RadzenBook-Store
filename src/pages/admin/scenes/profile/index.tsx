@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveIcon from '@mui/icons-material/Remove';
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 
 const Profile = () => {
   const theme = useTheme();
@@ -12,6 +12,23 @@ const Profile = () => {
 
   const [open, setOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
+
+  const [fullname, setFullname] = useState('');
+  const [email, setEmail] = useState('');
+  const [numberPhone, setNumberPhone] = useState('');
+  const [address, setAddress] = useState('');
+
+  useEffect(() => {
+    const storedFullname = sessionStorage.getItem("fullname");
+    const storedEmail = sessionStorage.getItem("email");
+    const storedNumberPhone = sessionStorage.getItem("numberPhone");
+    const storedAddress = sessionStorage.getItem("address");
+
+    if (storedFullname) setFullname(storedFullname);
+    if (storedEmail) setEmail(storedEmail);
+    if (storedNumberPhone) setNumberPhone(storedNumberPhone);
+    if (storedAddress) setAddress(storedAddress);
+  }, []);
 
 
   const handleEditClick = () => {
@@ -67,19 +84,19 @@ const Profile = () => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Typography variant="h6">Họ và tên:</Typography>
-            <Typography variant="body1">Nguyễn Văn A</Typography>
+            <Typography variant="body1">{fullname}</Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6">Email:</Typography>
-            <Typography variant="body1">nguyenvana@example.com</Typography>
+            <Typography variant="body1">{email}</Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6">Số điện thoại:</Typography>
-            <Typography variant="body1">0901234567</Typography>
+            <Typography variant="body1">{numberPhone}</Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6">Địa chỉ:</Typography>
-            <Typography variant="body1">123 Đường ABC, Quận 1, TP.HCM</Typography>
+            <Typography variant="body1">{address}</Typography>
           </Grid>
         </Grid>
       </Paper>
