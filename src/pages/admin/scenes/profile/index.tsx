@@ -5,6 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveIcon from '@mui/icons-material/Remove';
 import React, { memo, useEffect, useState } from "react";
+import { GetProfileByUserName } from "../../../../services/AllServices";
 
 const Profile = () => {
   const theme = useTheme();
@@ -17,17 +18,28 @@ const Profile = () => {
   const [email, setEmail] = useState('');
   const [numberPhone, setNumberPhone] = useState('');
   const [address, setAddress] = useState('');
+  const [gender, setGender] = useState<boolean>(true);
+
+  const fetchProfile = async () => {
+    try {
+      const username = sessionStorage.getItem('username');
+      if (username) {
+        const profile = await GetProfileByUserName(username);
+        if (profile) {
+          setFullname(profile["fullName"]);
+          setEmail(profile["email"]);
+          setNumberPhone(profile["numberPhone"]);
+          setAddress(profile["adress"]);
+          setGender(profile["gender"]);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  };
 
   useEffect(() => {
-    const storedFullname = sessionStorage.getItem("fullname");
-    const storedEmail = sessionStorage.getItem("email");
-    const storedNumberPhone = sessionStorage.getItem("numberPhone");
-    const storedAddress = sessionStorage.getItem("address");
-
-    if (storedFullname) setFullname(storedFullname);
-    if (storedEmail) setEmail(storedEmail);
-    if (storedNumberPhone) setNumberPhone(storedNumberPhone);
-    if (storedAddress) setAddress(storedAddress);
+    fetchProfile();
   }, []);
 
 
@@ -97,6 +109,10 @@ const Profile = () => {
           <Grid item xs={12}>
             <Typography variant="h6">Địa chỉ:</Typography>
             <Typography variant="body1">{address}</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6">Giới tính:</Typography>
+            <Typography variant="body1">{gender ? 'Nam' : 'Nữ'}</Typography>
           </Grid>
         </Grid>
       </Paper>

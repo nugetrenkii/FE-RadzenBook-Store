@@ -30,7 +30,7 @@ const RouterCustom = () => {
 
   useEffect(() => {
     if (sessionStorage.getItem("token")) {
-      loginContext(sessionStorage.getItem("username"), sessionStorage.getItem("token"), sessionStorage.getItem("role"),sessionStorage.getItem("fullname"),sessionStorage.getItem("email"),sessionStorage.getItem("numberPhone"),sessionStorage.getItem("address"))
+      loginContext(sessionStorage.getItem("username"), sessionStorage.getItem("token"), sessionStorage.getItem("role"))
     }
   }, [])
 

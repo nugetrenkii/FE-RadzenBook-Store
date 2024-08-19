@@ -195,13 +195,13 @@ interface ColorModeContextType {
 
 export const ColorModeContext = React.createContext<ColorModeContextType>({
   toggleColorMode: () => {},
-  mode: "light",
+  mode: "dark",
 });
 export const useMode = () => {
-  const [mode, setMode] = useState<string>("light");
+  const [mode, setMode] = useState<string>("dark");
 
   const toggleColorMode = () => {
-    setMode((prev) => (prev === 'light' ? 'dark' : 'light'));
+    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
   const colorsMode = useMemo(

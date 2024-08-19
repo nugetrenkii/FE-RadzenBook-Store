@@ -113,7 +113,7 @@ const LoginSignup: React.FC = () => {
 
             if (response && response["token"]) {
                 sessionStorage.setItem("token", response["token"]);
-                loginContext(username, response["token"], response['role'], response["fullName"], response["email"], response["numberPhone"], response["address"]);
+                loginContext(username, response["token"], response['role']);
                 if (response['role'] === 'KhachHang') {
                     navigate('/');
                 } else if (response['role'] === 'Admin') {

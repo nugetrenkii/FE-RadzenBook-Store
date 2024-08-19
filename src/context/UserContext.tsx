@@ -7,7 +7,7 @@ interface User {
 
 interface UserContextProps {
   user: User;
-  loginContext: (username: string, token: string, role: string, fullName: string, email:string, numberPhone: string, adress:string) => void;
+  loginContext: (username: string, token: string, role: string) => void;
   logout: () => void;
 }
 
@@ -24,28 +24,17 @@ interface UserProviderProps {
 const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User>({ username: '', auth: false });
 
-  const loginContext = (username: string, token: string, role: string, fullName: string, email:string, numberPhone: string, adress:string) => {
+  const loginContext = (username: string, token: string, role: string) => {
     setUser({ username, auth: true });
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('username', username);
     sessionStorage.setItem('role', role);
-     //Lưu các thông tin khác vào sessionStorage
-     sessionStorage.setItem('fullName', fullName);
-     sessionStorage.setItem('email', email);
-     sessionStorage.setItem('numberPhone', numberPhone);
-     sessionStorage.setItem('address', adress);
-    //  sessionStorage.setItem('gender', JSON.stringify(gender));
   };
 
   const logout = () => {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('role');
-    sessionStorage.removeItem('fullName');
-    sessionStorage.removeItem('email');
-    sessionStorage.removeItem('numberPhone');
-    sessionStorage.removeItem('address');
-    // sessionStorage.removeItem('gender');
     setUser({ username: '', auth: false });
   };
 
