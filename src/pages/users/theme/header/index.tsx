@@ -82,13 +82,13 @@ const HeaderUS = () => {
       path: ROUTERS.USER.HOME,
     },
     {
-      name: "Sản phẩm",
+      name: "Cửa hàng",
       path: ROUTERS.USER.PRODUCTS,
     },
     {
-      name: "Cửa hàng",
+      name: "Sản phẩm",
       path: "",
-      isShoSubMenu: false,
+      isShoSubMenu: true,
       child: [
         {
           name: "Sách",
@@ -106,22 +106,11 @@ const HeaderUS = () => {
     },
     {
       name: "Tài khoản",
-      path: "",
-      isShoSubMenu: false,
-      child: [
-        {
-          name: "Thông tin cá nhân",
-          path: "",
-        },
-        {
-          name: "Trạng thái đơn hàng",
-          path: "/order-status",
-        },
-      ],
+      path: "/profile-guest",    
     },
     {
-      name: "Thông tin",
-      path: "",
+      name: "Trạng thái",
+      path: "/order-status",
     },
   ]);
 
@@ -375,7 +364,7 @@ const HeaderUS = () => {
                             >
                               <Link
                                 to={childItem.path}
-                                onClick={(e) => {
+                                onClick={() => {
                                   setSelectedDropdown(`${menuKey}-${childKey}`);
                                 }}
                               >

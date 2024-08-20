@@ -4,6 +4,7 @@ import { default as ProductDetailPage } from "./users/productDetailPage";
 import { default as ShoppingCartPage } from "./users/shoppingCartPage";
 import { default as CheckoutPage } from "./users/checkoutPage";
 import { default as OrderStatusTest } from "./users/OderStatusTest";
+import { default as ProfileGuest } from "./users/profile";
 
 import { default as HomePageAdmin } from "./admin/homepage";
 import { default as Dashboard } from "./admin/scenes/dashboard";
@@ -30,5 +31,6 @@ export {
   Authors,
   Types, 
   Supplier,
-  OrderStatusTest
+  OrderStatusTest,
+  ProfileGuest
 };

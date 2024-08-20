@@ -27,14 +27,15 @@ const Team = () => {
     try {
       const data = await GetAllAccounts();
       const formattedData = (data.$values || []).map((user) => {
-        console.log('User data:', user.fullName); 
+        console.log('User data:', user); 
         return {
-          id: user.$id, // Chú ý rằng bạn có thể cần sử dụng user.$id thay vì user.id
+          id: user.$id, 
           full_name: user.fullName,
           username: user.userName || "N/A",
           email: user.email || "N/A",
           numberPhone: user.numberPhone || "N/A",
-          status: user.userStatus === 1 ? "Active" : "Inactive" 
+          status: user.userStatus === 1 ? "Active" : "Inactive" ,
+          gender: user.gender === true ? "Nam" : "Nữ" 
         };
       });
       console.log('Formatted data:', formattedData);
@@ -63,6 +64,12 @@ const Team = () => {
       cellClassName: "name-column--cell",
     },
     {
+      field: "gender",
+      headerName: "Gender",
+      flex: 1,
+      cellClassName: "name-column--cell",
+    },
+    {
       field: "email",
       headerName: "Email",
       flex: 1,
@@ -79,7 +86,7 @@ const Team = () => {
       renderCell: ({ row: { status } }) => {
         return (
           <Box
-            width="50%"
+            width="100%"
             m="10 auto"
             p="5px"
             marginTop={1}

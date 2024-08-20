@@ -15,7 +15,8 @@ import {
   Authors,
   Types,
   Supplier,
-  OrderStatusTest
+  OrderStatusTest,
+  ProfileGuest
 } from "../pages";
 import MasterUsLayout from "./users/theme/masterUsLayout";
 import { CartProvider } from "./users/shoppingCartPage/CartContext";
@@ -60,6 +61,10 @@ const RouterCustom = () => {
     {
       path: ROUTERS.USER.ORDER_STATUS,
       component: <OrderStatusTest />,
+    },
+    {
+      path: ROUTERS.USER.PROFILE_GUEST,
+      component: <ProfileGuest />,
     },
   ];
   const adminRouters = [
